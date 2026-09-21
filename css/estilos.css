@@ -7,8 +7,9 @@
 
 /*--------------------BODY----------------------*/
 #body1 {
-	background-image: url(../img/fondos/fondo1.png);
 	background-attachment: fixed;
+	background-color: black;
+	background-image: url(../img/fondos/fondo1.jpeg);
 }
 /*--------------------BODY----------------------*/
 
@@ -16,26 +17,25 @@
 /*--------------------HEADER----------------------*/
 
 header {
-	margin-bottom: 100px;
+	margin-bottom: 5rem;
 }
 
 header h1 {
 	text-align: center;
 	font-size: 9.5rem;
-	color: white;
+	color: red;
 	vertical-align: top;
-	margin-bottom: 30px;
+	margin-bottom: 2rem;
 }
 
-#meta {
+#mainh1 {
 	font-family: "Jacquard 12", system-ui;
   	font-weight: 400;
   	font-style: normal;
-  	background-image: url(../img/tags/index.html/meta.png);
   	background-size: 724px 184px;
   	background-repeat: no-repeat;
-  	padding-top: 24px;
-  	padding-top: 30px;
+  	padding-top: 1.5rem;
+  	padding-top: 2rem;
 }
 
 header ul, header ul a {
@@ -53,60 +53,42 @@ header ul, header ul a {
 }
 
 #inicio a:link {
-	color: rgb(0, 0, 255);
-	background-image: url(../img/tags/index.html/inicio.png);
+	color: darkred;
 	background-size: 312px 80px;
 	background-repeat: no-repeat;
 }
 
 #inicio a:visited {
-	color: rgb(0, 0, 255);
+	color: darkred;
 }
 
 #inicio a:hover {
-	color: white;
+	color: red;
 }
 
 #inicio a:active {
-	background-image: url(../img/tags/index.html/inicio2.png);
-	background-size: 312px 80px;
-	background-repeat: no-repeat;
+	color: darkred;
 }
 /*--------------------HEADER----------------------*/
 
 
 /*--------------------NAV----------------------*/
 
-#nav1 {
-	margin-top: 125px;
-	margin-bottom: 50px;
-}
-
 #nav1 ul {
+	display: flex;
 	list-style: none;
-	background-image: url(../img/tags/index.html/nav1.png);
-	background-size: 400px 246px;
-	background-repeat: no-repeat;
-	padding-top: 70px;
-	padding-right: 30px;
-	padding-bottom: 15px;
-	padding-left: 30px;
-	width: 400px;
-	margin: auto;
+	justify-content: center;
 }
 
+/*
 #scroll {
 	width: 400px;
 	height: 160px;
 	overflow-y: auto;
-}
-
-#scroll::-webkit-scrollbar-track {
-    background-color: rgb(0, 0, 255);
-}
+}*/
 
 .mainLi a {
-	font-size: 3rem;
+	font-size: 4.1rem;
 	text-decoration: none;
 	font-family: "Jacquard 12", system-ui;
   	font-weight: 400;
@@ -122,18 +104,43 @@ header ul, header ul a {
 }
 
 .mainLi a:link {
-	color: black;
+	color: darkred;
 }
 
 .mainLi a:hover {
-	color: rgb(0, 0, 255);
+	color: red;
 }
 
 .mainLi a:visited {
-	color: black;
+	color: darkred;
 }
 
 .mainLi a:active {
-	color: white;
+	color: darkred;
+}
+
+#nav2 ul {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	justify-content: center;
 }
 /*--------------------NAV----------------------*/
+
+/*-------------------MAIN----------------------*/
+
+main {
+	color: red;
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1.2rem;
+  	font-style: normal;
+	display: flex;
+	justify-content: center;
+}
+
+#info-nos {
+	width: 33%;
+	text-align: center;
+	line-height: 1.3;
+	border: 3px solid red;
+}
