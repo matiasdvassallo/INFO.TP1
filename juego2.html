@@ -8,30 +8,48 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+		<title>Dados de Sangre</title>
 
-		<title>MetaJuegos - Juego 2</title>
 	</head>
 	<body id="body1">
 		<header>
-			<h1><span id="meta"> Juego 2 ‎</span></h1>
+			<h1><span id="mainh1">Dados Sangrientos</span></h1>
 			<ul>
-				<li id="inicio"><a href="index.html" target="_self"><span>‎ - Inicio - ‎</span></a></li>
+				<li id="inicio"><a href="index.html" target="_self"><span>+ Inicio +</span></a></li>
 			</ul>
+				<nav id="nav1">
+					<ul>
+							<li class="mainLi" id="juegosnav"><a href="#" target="_self"><span>Juegos</span></a></li>
+							<li class="mainLi"><a href="puntajes.html" target="_self"><span>Puntajes</span></a></li>
+							<li class="mainLi"><a href="info.html" target="_self"><span>Info!</span></a></li>
+					</ul>
+				</nav>
+				<div id="nav2">
+					<ul id="ul2">
+					<!--ACA VA UN MENU QUE APARECE AL HACER CLICK EN 'JUEGOS' Y DESPLEGA LOS LINKS A LOS RESPECTIVOS JUEGOS-->
+					</ul>
+				</div>
 		</header>
 
-		<nav id="nav1">
-			<ul>
-				<div id="scroll">
-				<li class="mainLi"><a href="juego1.html" target="_self">‎ Juego 1 ‎</a></li>
-				<li class="mainLi"><a href="juego2.html" target="_self">‎ Juego 2 ‎</a></li>
-				<li class="mainLi"><a href="juego3.html" target="_self">‎ Juego 3 ‎</a></li>
-				<li class="mainLi"><a href="puntajes.html" target="_self">‎ Puntajes ‎</a></li>
-				<li class="mainLi"><a href="info.html" target="_self">‎ Info! ‎</a></li>
-				</div>
-			</ul>
-		</nav>
-
-		<main>
+		<main id="main-juego2">
+			<article id="article-dados">
+				<p>En este vampijuego disponés de 2 dados para lanzar con el <span>botón</span>. Vas a poder ir acumulando <span>Puntos Sangrientos</span> a medida que vas tirando los dados. Sin embargo, <span>si los dados llegan a formar un 13</span> (Simbolo del mal presagio y la muerte) <span>VAMPIPERDISTE!</span></p>
+				<p>Es un juego de azar y mucha adrenalina, por ello, si estás contentx con tu <span>Puntaje Sangriento</span> podés <span>Vampiplantarte</span> y terminar tu turno ahí</p>
+			</article>
+			<section id="dados">
+				<img src="img/fotos/dados/dado1.png" alt="Dado 1" id="img-dado1">
+				<img src="img/fotos/dados/dado1.png" alt="Dado 2" id="img-dado2">
+			<div id="dadosboton">
+				<button type="button" name="tirardados" id="tirardados">Tirar Dados!</button>
+			</div>
+			</section>
+			<aside>
+				<h2 id="titulo-dados">Puntos Sangrientos</h2>
+				<p id="puntos-sangrientos">0</p>
+				<button type="button" id="plantarse">Vampiplantarse</button>
+				<button id="reiniciar" hidden>Reiniciar</button>
+			</aside>
 		</main>
 
 		<footer>
