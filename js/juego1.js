@@ -36,6 +36,7 @@ let botonChancho = document.querySelector('#btnChancho');
 let ordenTocaron = [];
 let rondaTerminada = false;
 let botonReiniciar = document.querySelector('#btnReiniciar');
+const PALABRA = "CHANCHO";
 
 function sacarRandom(x) {
     const indice = Math.floor(Math.random() * x.length);
@@ -44,6 +45,10 @@ function sacarRandom(x) {
 }
 
 function repartir() {
+    cartasSinRepartir = [];
+    for (let i = 1; i <= jugadores.length; i++) {
+        cartasSinRepartir.push(i, i, i, i);
+    }
     jugadores.forEach(function(x) {
         x.carta1 = sacarRandom(cartasSinRepartir);
         x.carta2 = sacarRandom(cartasSinRepartir);
@@ -75,7 +80,7 @@ function desplazar(posJug1) {
     });
 
     jugadores.forEach(function(jugador, i) {
-        const indiceDerecha = (i - 1 + cantidadJug) % cantidadJug;
+        const indiceDerecha = (i - 1 + jugadores.length) % jugadores.length;
         const posicion = posicionesElegidas[i];
         jugador['carta' + posicion] = cartasEnviadas[indiceDerecha];
     });
@@ -85,6 +90,7 @@ function desplazar(posJug1) {
     }
 
     revisarChancho();
+    chequeoBluff();
 }
 
 function detectarIguales(jugador) {
@@ -96,9 +102,17 @@ function detectarIguales(jugador) {
 function revisarChancho() {
     botonChancho.disabled = true;
 
-    jugadores.forEach(function(jugador, i) {
+     jugadores.forEach(function(jugador, i) {
         if (detectarIguales(jugador)) {
             if (i === 0) {
+                // sos vos: solo habilitamos el botón, el click lo disparás vos mismo
+                botonChancho.disabled = false;
+            } else {
+                // es un bot: él mismo dispara la ronda de CHANCHO
+                tocarChancho(jugador.numeroJug);
+                programarBots();
+                
+                // como alguien ya tocó, vos también tenés que poder reaccionar
                 botonChancho.disabled = false;
             }
         }
@@ -116,29 +130,24 @@ function estaEnArray(array, valor) {
 
 function tocarChancho(numeroJugador) {
     if (rondaTerminada) return;
-
     if (estaEnArray(ordenTocaron, numeroJugador)) return;
 
     ordenTocaron.push(numeroJugador);
 
-    botonChancho.disabled = false;
+    if (ordenTocaron.length === jugadores.length) {
+        resolverRondaChancho();
+    }
+}
 
-    jugadores.forEach(function(jugador, i) {
-        
-        const numJug = jugador.numeroJug;
-
-        if (numJug !== numeroJugador && !estaEnArray(ordenTocaron, numJug)) {
-            const tiempoRandom = (Math.random() * (5 - 0.5) + 0.5) * 1000;
+function programarBots() {
+    jugadores.forEach(function(jugador) {
+        if (jugador.numeroJug !== 1) {
+            const tiempoRandom = (Math.random() * (1 - 0.1) + 0.1) * 1000;
             setTimeout(function() {
-                tocarChancho(numJug);
+                tocarChancho(jugador.numeroJug);
             }, tiempoRandom);
         }
     });
-
-     if (ordenTocaron.length === jugadores.length) {
-        
-        resolverRondaChancho();
-     }
 }
 
 function resolverRondaChancho() {
@@ -152,27 +161,26 @@ function resolverRondaChancho() {
 
 function agregarLetra(jugador) {
     
-    // Buscamos el contenedor de letras de ESE jugador específico
-    // (por ejemplo, si jugador.numeroJug es 2, busca "#letras-2")
+     // Buscamos el contenedor de letras de ESE jugador
     const letrasDiv = document.querySelector('#letras-' + jugador.numeroJug);
     
-    // Dentro de ese contenedor, buscamos todos los <span> que todavía
-    // tienen la clase "oculta" (o sea, las letras que faltan revelar)
-    const ocultas = letrasDiv.querySelectorAll('.oculta');
+    // Agarramos TODOS los spans (ya no filtramos por "oculta", ahora son todos iguales)
+    const spans = letrasDiv.querySelectorAll('.letra');
     
-    // Guardamos el texto de la PRIMERA oculta (la próxima letra a revelar)
-    // antes de sacarle la clase, para poder usarlo después
-    const letraRevelada = ocultas[0].textContent;
+    // La cantidad de letras que el jugador ya tiene nos dice qué posición
+    // es la próxima a completar (si ya tiene "CH", la próxima es la posición 2, índice 2 → "A")
+    const posicion = jugador.letras.length;
     
-    // Le sacamos la clase "oculta" a ese span, así se hace visible en pantalla
-    ocultas[0].classList.remove('oculta');
+    // Buscamos en la constante PALABRA qué letra corresponde a esa posición
+    const letra = PALABRA[posicion];
+    
+    // Se la escribimos al span correspondiente (reemplaza el "_")
+    spans[posicion].textContent = letra;
 
-    // Actualizamos el dato del jugador en el array, sumándole la letra nueva
-    jugador.letras += letraRevelada;
+    // Actualizamos el dato del jugador
+    jugador.letras += letra;
 
-    // Chequeamos si la letra que se acaba de revelar fue la "O"
-    // (que es la última letra de "CHANCHO", o sea, se completó la palabra)
-    if (letraRevelada === 'O') {
+    if (letra === 'O') {
         eliminado(jugador);
     } else {
         ordenTocaron = [];
@@ -207,15 +215,6 @@ function eliminado(jugador) {
         ordenTocaron = [];
         rondaTerminada = false;
         
-        // Volvemos a armar el mazo completo, MENOS las 4 cartas
-        // del jugador que acaba de ser eliminado (esas ya no se usan más)
-        for (i = 1; i <= jugadores.length; i++) {
-            cartasSinRepartir.push(i);
-            cartasSinRepartir.push(i);
-            cartasSinRepartir.push(i);
-            cartasSinRepartir.push(i);
-        }
-        
         // Repartimos de nuevo para arrancar la próxima ronda
         repartir();
         
@@ -239,9 +238,9 @@ function reiniciar() {
     // Reseteamos el array de jugadores, volviendo a crear los 4 desde cero
     jugadores = [];
     for (let i = 1; i <= cantidadJug; i++) {
-        jugadores.push({
-            numeroJug: i,
-            letras: ''
+        const spans = document.querySelectorAll('#letras-' + i + ' .letra');
+        spans.forEach(function(span) {
+            span.textContent = '_';
         });
     }
     
@@ -249,12 +248,11 @@ function reiniciar() {
     ordenTocaron = [];
     rondaTerminada = false;
     
-    // Volvemos a mostrar todas las letras ocultas (por si algún jugador
-    // había revelado alguna en la partida anterior)
+
     for (let i = 1; i <= cantidadJug; i++) {
         const spans = document.querySelectorAll('#letras-' + i + ' .letra');
         spans.forEach(function(span) {
-            span.classList.add('oculta');
+            span.textContent = '_';
         });
     }
     
@@ -267,6 +265,33 @@ function reiniciar() {
     // Mostramos la pantalla de inicio y ocultamos el tablero
     tablero.style.display = 'none';
     inicio.style.display = 'block';
+}
+
+function chequeoBluff() {
+    // Si ya hay una ronda de chancho en curso, no interferimos
+    if (rondaTerminada === false && ordenTocaron.length > 0) return;
+
+    jugadores.forEach(function(jugador) {
+        // Los bots son todos menos el jugador 1 (vos)
+        if (jugador.numeroJug !== 1) {
+            
+            // 5% de probabilidad de que ESTE bot decida bluffear en este momento
+            const probabilidadBluff = 0.05;
+            
+            if (Math.random() < probabilidadBluff) {
+                
+                // Como alguien ya tocó CHANCHO (aunque sea mintiendo),
+                // vos también tenés que poder reaccionar, tengas o no 4 iguales
+                botonChancho.disabled = false;
+                
+                // El bot "toca" el botón
+                tocarChancho(jugador.numeroJug);
+                
+                // Programamos a los demás bots para que también reaccionen
+                programarBots();
+            }
+        }
+    });
 }
 
 const cartasJug1 = document.querySelectorAll('#jugador-1 .carta');
@@ -283,6 +308,12 @@ botonInicio.addEventListener('click', function(){
     inicio.style.display = 'none';
     tablero.style.display = 'block';
     repartir();
+});
+
+botonChancho.addEventListener('click', function() {
+    botonChancho.disabled = true;
+    tocarChancho(1);
+    programarBots();
 });
 
 botonReiniciar.addEventListener('click', function() {
