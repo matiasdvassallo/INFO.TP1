@@ -76,6 +76,7 @@ header ul, header ul a {
 #nav1 ul {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	flex-direction: row;
 	gap: 4.5rem;
 	list-style: none;
@@ -137,7 +138,7 @@ header ul, header ul a {
 /*INDEX*/
 /*-------------------MAIN----------------------*/
 
-main {
+#main-index {
 	color: red;
 	font-family: "Press Start 2P", system-ui;
 	font-size: 1.2rem;
@@ -159,6 +160,11 @@ main {
 /*JUEGO1*/
 /*-------------------MAIN----------------------*/
 
+#main-juego1 {
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1.2rem;
+	color: red;
+}
 #form1 {
 	display: flex;
 	flex-direction: column;
@@ -168,6 +174,7 @@ main {
 
 #form1 label {
 	text-decoration: 3px solid red underline;
+	text-align: center;
 }
 
 #form1 button {
@@ -205,6 +212,9 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1.2rem;
+	color: red;
 }
 #dados {
 	background-color: black;
@@ -246,6 +256,7 @@ main {
 	font-size: 1.4rem;
 	text-decoration: 3px solid crimson underline;
 }
+
 aside {
 	background-color: black;
 	border: 3px solid crimson;
@@ -300,7 +311,7 @@ aside h2 {
 }
 
 #article-dados {
-	width: 90%;
+	width: 92%;
 	background-color: black;
 	border: 3px solid red;
 	text-align: justify;
@@ -316,3 +327,58 @@ aside h2 {
 }
 /*-------------------MAIN----------------------*/
 /*JUEGO2*/
+
+/*SECRETOS*/
+/*-------------------MAIN----------------------*/
+
+#main-secretos {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+#main-secretos article {
+	width: 90%;
+	background-color: black;
+	border: 3px solid;
+	color: red;
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1.2rem;
+	line-height: 1.2;
+	text-align: center;
+	padding: 10px
+}
+
+#secretos1 {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+#secretos1 h2 {
+	color: crimson;
+	font-family: "Jacquard 12", system-ui;
+	font-size: 6rem;
+	font-weight: 400;
+  	font-style: normal;
+	margin: 50px;
+	text-align: center;
+	text-shadow: 2px 2px 20px black;
+}
+
+#secretos1 article {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	font-size: 1rem;
+	border: 3px solid crimson;
+	color: crimson;
+	margin: 10px;
+	height: 100px;
+}
+/*-------------------MAIN----------------------*/
+/*SECRETOS*/
