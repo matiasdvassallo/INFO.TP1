@@ -29,7 +29,7 @@ for(i=1; i<=cantidadJug; i++) {
         letras: ''
     })
 }
-let inicio = document.querySelector('#inicio');
+let inicio = document.querySelector('#pantInicio');
 let tablero = document.querySelector('#tablero');
 let botonInicio = document.querySelector('#btnIniciar');
 let botonChancho = document.querySelector('#btnChancho');
@@ -51,10 +51,10 @@ function repartir() {
         x.carta4 = sacarRandom(cartasSinRepartir);
     });
 
-    document.querySelector('#carta-1-1').src = '../img/cartas/' + jugadores[0].carta1 + '.png';
-    document.querySelector('#carta-1-2').src = '../img/cartas/' + jugadores[0].carta2 + '.png';
-    document.querySelector('#carta-1-3').src = '../img/cartas/' + jugadores[0].carta3 + '.png';
-    document.querySelector('#carta-1-4').src = '../img/cartas/' + jugadores[0].carta4 + '.png';
+    document.querySelector('#carta-1-1').src = './img/cartas/' + jugadores[0].carta1 + '.png';
+    document.querySelector('#carta-1-2').src = './img/cartas/' + jugadores[0].carta2 + '.png';
+    document.querySelector('#carta-1-3').src = './img/cartas/' + jugadores[0].carta3 + '.png';
+    document.querySelector('#carta-1-4').src = './img/cartas/' + jugadores[0].carta4 + '.png';
     
     revisarChancho();
 }
@@ -81,7 +81,7 @@ function desplazar(posJug1) {
     });
 
     for (let i = 1; i<=4; i++) {
-        document.querySelector('#carta-1-' + i).src = '../img/cartas/' + jugadores[0]['carta' + i] + '.png';
+        document.querySelector('#carta-1-' + i).src = './img/cartas/' + jugadores[0]['carta' + i] + '.png';
     }
 
     revisarChancho();
