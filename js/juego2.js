@@ -31,14 +31,27 @@ let reiniciar = document.querySelector('#reiniciar');
 
 let puntaje = 0;
 botondados.disabled = false;
-plantarse.disabled = false;
+plantarse.disabled = true;
+let vampiplantarse = false;
 
 let efectoP = document.querySelector('#efecto-p')
+
+if (plantarse.disabled == true) {
+    plantarse.style.border = '3px solid gray';
+    plantarse.style.color = 'gray';
+};
 
 // FUNCIÓN DE DADOS
 botondados.addEventListener('click', function(e) {
     e.preventDefault()
     
+    plantarse.disabled = false;
+
+    if (plantarse.disabled == false) {
+        plantarse.style.border = '3px solid crimson';
+        plantarse.style.color = 'crimson';
+    };
+
     // DATO DE DADOS
     let dado1 = Math.floor(Math.random() * 6) + 1;
     let dado2 = Math.floor(Math.random() * 6) + 1;
@@ -76,11 +89,14 @@ botondados.addEventListener('click', function(e) {
 
     let evento2 = Math.floor(Math.random() * 15) + 1;
 
-    if (evento2 == 1 && puntaje > 0) {
+    if (evento2 == 1 && puntaje > 0 && puntaje <= 1000) {
         puntaje *= 2;
         efectoP.innerText = 'Dracubendición!';
         efectoP.style.color = 'gold';
     };
+
+    //MOSTRAR RESULTADO
+    puntos.innerText = puntaje;
 
     // COMRPOBAR DERROTA
     if (dado1 == 1 && dado2 == 3) {
@@ -92,24 +108,18 @@ botondados.addEventListener('click', function(e) {
         plantarse.style.color = 'gray'
         botondados.style.border = '3px solid gray'
         botondados.style.color = 'gray'
-    }
-
-    //MOSTRAR RESULTADO
-    puntos.innerText = puntaje;
-
-    // SISTEMA DE SECRETOS
-    if (puntaje >= 100) {
-        setTimeout(function() {
-            alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-        }, 0);
     };
 
-    // GUARDAR DATO DE VARIABLE PUNTAJE EN LOCAL STORAGE
-    let puntajeGuardado = localStorage.setItem('puntaje', puntaje);
-});
+    // FUNCIÓN DE REINICIAR
+    reiniciar.addEventListener('click', function(e) {
+        location.reload();
+    });
 
-// FUNCIÓN DE PLANTARSE
-plantarse.addEventListener ('click', function(e) {
+    });
+
+    // FUNCIÓN DE PLANTARSE
+    plantarse.addEventListener ('click', function(e) {
+    vampiplantarse = true;
     titulo.innerText = 'Puntos Sangrientos FINALES';
     plantarse.disabled = true;
     botondados.disabled = true;
@@ -118,11 +128,57 @@ plantarse.addEventListener ('click', function(e) {
     plantarse.style.color = 'gray'
     botondados.style.border = '3px solid gray'
     botondados.style.color = 'gray'
-})
+    let puntajeGuardado = localStorage.setItem('puntaje', puntaje);
 
-// FUNCIÓN DE REINICIAR
-reiniciar.addEventListener('click', function(e) {
-    location.reload();
-})
+    let secreto1Condition = localStorage.getItem('secreto1');
+    let secreto2Condition = localStorage.getItem('secreto2');
+    let secreto3Condition = localStorage.getItem('secreto3');
+    let secreto4Condition = localStorage.getItem('secreto4');
+    let secreto5Condition = localStorage.getItem('secreto5');
+    let secreto6Condition = localStorage.getItem('secreto6');
+    let secreto7Condition = localStorage.getItem('secreto7');
+    let secreto8Condition = localStorage.getItem('secreto8');
+    let secreto9Condition = localStorage.getItem('secreto9');
+    let secreto10Condition = localStorage.getItem('secreto10');
+        
+    // SISTEMA DE SECRETOS
+    if (puntaje >= 100 && vampiplantarse == true && secreto1Condition == 'false') {
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+    };
+    if (puntaje >= 250 && vampiplantarse == true && secreto2Condition == 'false') {
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+    };
+    if (puntaje >= 400 && vampiplantarse == true && secreto3Condition == 'false') {
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+    };
+    if (puntaje >= 650 && vampiplantarse == true && secreto4Condition == 'false') {
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+    };
+    if (puntaje >= 1000 && vampiplantarse == true && secreto5Condition == 'false') {
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+    };
+    if (puntaje >= 1300 && vampiplantarse == true && secreto6Condition == 'false') {
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+    };
+    if (puntaje >= 1600 && vampiplantarse == true && secreto7Condition == 'false') {
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+    };
+    if (puntaje >= 2000 && vampiplantarse == true && secreto8Condition == 'false') {
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+    };
+    if (puntaje >= 3000 && vampiplantarse == true && secreto9Condition == 'false') {
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+    };
+    if (puntaje >= 4500 && vampiplantarse == true && secreto10Condition == 'false') {
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+    };
+
+    // FUNCIÓN DE REINICIAR
+    reiniciar.addEventListener('click', function(e) {
+        location.reload();
+    });
+
+    });
+
 
 //--------------------------------------------------------------------------------------JUEGO DADOS
