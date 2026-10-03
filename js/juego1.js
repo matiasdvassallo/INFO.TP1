@@ -76,13 +76,15 @@ function revisarChancho() {
             if (i === 0) {
                 botonChancho.disabled = false;
                 botonChancho.style.color = 'red';
-                botonChanco.style.border = '3px solid red';
+                botonChancho.style.border = '3px solid red';
 
             } else {
                 tocarChancho(jugador.numeroJug);
                 programarBots();
                 
                 botonChancho.disabled = false;
+                botonChancho.style.color = 'red';
+                botonChancho.style.border = '3px solid red';
             }
         }
     });
@@ -297,6 +299,8 @@ function chanchoFalso() {
                 
                 // Se habilita el botón al usuario
                 botonChancho.disabled = false;
+                botonChancho.style.color = 'red';
+                botonChancho.style.border = '3px solid red';
                 
                 // Se habilita el botón a los bots
                 programarBots();
