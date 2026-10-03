@@ -9,6 +9,7 @@
 #body1 {
 	background-attachment: fixed;
 	background-position: center;
+	background-repeat: no-repeat;
 	background-color: black;
 	background-image: url(../img/fondos/fondo1.jpeg);
 }
