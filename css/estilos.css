@@ -8,6 +8,7 @@
 /*--------------------BODY----------------------*/
 #body1 {
 	background-attachment: fixed;
+	background-position: left top;
 	background-color: black;
 	background-image: url(../img/fondos/fondo1.jpeg);
 }
@@ -20,6 +21,8 @@ header {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	align-items: center;
+	text-align: center;
 }
 
 header h1 {
@@ -28,6 +31,7 @@ header h1 {
 	color: red;
 	vertical-align: top;
 	margin-bottom: 0;
+	text-shadow: 2px 2px 20px black;
 }
 
 #mainh1 {
@@ -49,6 +53,7 @@ header ul, header ul a {
 	font-family: "Jacquard 12", system-ui;
   	font-weight: 400;
   	font-style: normal;
+	text-shadow: 2px 2px 20px black;
 }
 
 #inicio a:link {
@@ -161,47 +166,131 @@ header ul, header ul a {
 /*-------------------MAIN----------------------*/
 
 #main-juego1 {
-	font-family: "Press Start 2P", system-ui;
-	font-size: 1.2rem;
-	color: red;
+	text-shadow: 2px 2px 20px black;
 }
-#form1 {
+
+#pantInicio {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	gap: 1.5rem;
-}
-
-#form1 label {
-	text-decoration: 3px solid red underline;
-	text-align: center;
-}
-
-#form1 button {
-	align-self: center;
-	color: darkred;
+	align-items: center;
 	font-family: "Press Start 2P", system-ui;
 	font-size: 1.2rem;
-	padding: 10px;
-	background-color: black;
-	border: 2px solid red;
+	color: red;
+	margin-top: -70px;
+	margin-bottom: 70px;
 }
 
-#form1 button:active {
+#pantInicio h1 {
+	text-decoration: 3px solid red underline;
+	text-shadow: 2px 2px 20px black;
+}
+
+#pantInicio button {
+	border: 3px solid red;
+	color: darkred;
+	background-color: black;
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1rem;
+	padding: 15px;
+}
+
+#pantInicio button:hover {
 	color: red;
 }
 
-#definirCant {
-	text-decoration: 3px solid darkred underline;
+#pantInicio button:active {
+	color: darkred;
 }
 
-#definirCant:active {
+/*JUGADOR 1*/
+#jugador-1 {
+	margin-top: -50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1.2rem;
+	color: red;
+}
+
+#mensaje {
 	text-decoration: 3px solid red underline;
 }
 
-#form1 label {
-	font-size: 1.4rem;
+#jugador-1 img {
+		border: 3px solid red;
+		width: 166px;
+		height: 242px;
+	}
+
+#jugador-1 h3 {
+	text-decoration: 3px solid red underline;
+	background-color: black;
+	border: 3px solid red;
+	padding: 10px;
 }
+
+#letras-1 {
+	margin-top: 20px;
+	background-color: black;
+	border: 3px solid red;
+	padding: 10px;
+}
+
+#btnChancho, #btnReiniciar {
+	font-size: 1.5rem;
+	border: 3px solid red;
+	padding: 15px;
+	font-family: "Press Start 2P", system-ui;
+	margin-top: 20px;
+	color: darkred;
+	background-color: black;
+}
+
+#btnChancho:hover, #btnReiniciar:hover {
+	color: red;
+}
+
+#btnChancho:active, #btnReiniciar:active {
+	color: red;
+}
+/*JUGADOR 1*/
+
+/*BOTS*/
+#jugador-2, #jugador-3, #jugador-4 {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: flex-end;
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1.2rem;
+	color: crimson;
+}
+
+#jugador-2 img, #jugador-3 img, #jugador-4 img {
+		border: 3px solid crimson;
+		width: 166px;
+		height: 242px;
+	}
+
+#jugador-2 h3, #jugador-3 h3, #jugador-4 h3 {
+	text-decoration: 3px solid crimson underline;
+	background-color: black;
+	border: 3px solid crimson;
+	padding: 10px;
+}
+
+#letras-2, #letras-3, #letras-4 {
+	margin-top: 20px;
+	background-color: black;
+	border: 3px solid crimson;
+	padding: 10px;
+}
+/*BOTS*/
+
+
 /*-------------------MAIN----------------------*/
 /*JUEGO1*/
 

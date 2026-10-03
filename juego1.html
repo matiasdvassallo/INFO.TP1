@@ -14,8 +14,7 @@
 	</head>
 	<body id="body1">
 		<header>
-			<h1><span id="mainh1">Chancho 
-				<br>va(mpiro)</span></h1>
+			<h1 id="mainh1">VampiJuegos</h1>
 			<ul>
 				<li id="inicio"><a href="index.html" target="_self"><span>+ Inicio +</span></a></li>
 			</ul>
@@ -34,8 +33,7 @@
 				</div>
 		</header>
 
-<<<<<<< Updated upstream
-		<main>
+		<main id="main-juego1">
 			 <!-- Pantalla de inicio -->
 			<div id="pantInicio">
 				<h1>Chancho Va(mpiro)</h1>
@@ -49,6 +47,7 @@
 				<div class="jugador" id="jugador-1">
 					<h3>Jug 1 (vos)</h3>
 					<div class="cartas">
+						<p id="mensaje">Elegí qué carta desplazar!</p>
 						<img src="img/cartas/dorso.png" class="carta" id="carta-1-1">
 						<img src="img/cartas/dorso.png" class="carta" id="carta-1-2">
 						<img src="img/cartas/dorso.png" class="carta" id="carta-1-3">
@@ -63,6 +62,12 @@
 						<span class="letra">_</span>
 						<span class="letra">_</span>
 					</div>
+				</div>
+
+								<!-- Botones centrales -->
+				<div id="centro">
+					<button id="btnChancho" disabled>CHANCHO!</button>
+					<button id="btnReiniciar" style="display:none;">Jugar de nuevo</button>
 				</div>
 
 				<!-- Jugador 2 (bot) -->
@@ -125,26 +130,8 @@
 					</div>
 				</div>
 
-				<!-- Botones centrales -->
-				<div id="centro">
-					<button id="btnChancho" disabled>CHANCHO</button>
-				</div>
-
-				<p id="mensaje">Elegí qué carta desplazar</p>
-				<button id="btnReiniciar" style="display:none;">Jugar de nuevo</button>
-
 			</div>
 
-=======
-		<main id="main-juego1">
-			<form id="form1"> 
-				<label>Elegí la cantidad de jugadores:</label>
-                    <button type="button" name="2" id="definirCant2">2</button>
-                    <button type="button" name="3" id="definirCant3">3</button>
-					<button type="button" name="4" id="definirCant4">4</button>
-					<button type="button" name="definirCant" id="definirCant">Iniciar</button>
-			</form>		
->>>>>>> Stashed changes
 		</main>
 
 		<footer>
