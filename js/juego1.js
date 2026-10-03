@@ -70,6 +70,8 @@ function repartir() {
 // Revisa si alguno de los jugadores juntó cuatro cartas iguales y se habilita el botón CHANCHO
 function revisarChancho() {
     botonChancho.disabled = true;
+    botonChancho.style.color = 'darkred';
+    botonChancho.style.border = '3px solid darkred';
 
      jugadores.forEach(function(jugador, i) {
         if (detectarIguales(jugador)) {
@@ -365,6 +367,8 @@ botonInicio.addEventListener('click', function(){
 // Escucha si el usuario tocó el botón CHANCHO
 botonChancho.addEventListener('click', function() {
     botonChancho.disabled = true;
+    botonChancho.style.color = 'darkred';
+    botonChancho.style.border = '3px solid darkred';
     tocarChancho(1);
     programarBots();
 });
