@@ -1,4 +1,4 @@
-/*
+
 //--------------------------------------------------------------------------------------MENU DESPLEGABLE
 let juegos = document.querySelector('#juegosnav');
 let navdos = document.querySelector('#ul2');
@@ -19,7 +19,7 @@ juegos.addEventListener('click', (e) => {
 
 });
 //--------------------------------------------------------------------------------------MENU DESPLEGABLE
-*/
+
 const palabraCompleta = "CHANCHO";
 let cantidadJug = 4;
 let cartasSinRepartir = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4];
@@ -75,6 +75,9 @@ function revisarChancho() {
         if (detectarIguales(jugador)) {
             if (i === 0) {
                 botonChancho.disabled = false;
+                botonChancho.style.color = 'red';
+                botonChanco.style.border = '3px solid red';
+
             } else {
                 tocarChancho(jugador.numeroJug);
                 programarBots();
