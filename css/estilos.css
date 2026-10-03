@@ -392,19 +392,19 @@ aside h2 {
 	background-color: #47415d;
 }
 
-#article-dados {
+#article-dados, #article-chancho {
 	width: 92%;
 	background-color: black;
 	border: 3px solid red;
 	text-align: justify;
 }
 
-#article-dados p {
+#article-dados p, #article-chancho p {
 	padding: 10px;
 	line-height: 1.3;
 }
 
-#article-dados p span {
+#article-dados p span, #article-chancho p span {
 	text-decoration: 3px solid red underline;
 }
 /*-------------------MAIN----------------------*/
