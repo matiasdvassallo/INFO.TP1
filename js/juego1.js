@@ -20,6 +20,7 @@ juegos.addEventListener('click', (e) => {
 });
 //--------------------------------------------------------------------------------------MENU DESPLEGABLE
 */
+const palabraCompleta = "CHANCHO";
 let cantidadJug = 4;
 let cartasSinRepartir = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4];
 let jugadores = [];
@@ -29,21 +30,23 @@ for(i=1; i<=cantidadJug; i++) {
         letras: ''
     })
 }
+let ordenTocaron = [];
+let rondaTerminada = false;
 let inicio = document.querySelector('#pantInicio');
 let tablero = document.querySelector('#tablero');
 let botonInicio = document.querySelector('#btnIniciar');
 let botonChancho = document.querySelector('#btnChancho');
-let ordenTocaron = [];
-let rondaTerminada = false;
 let botonReiniciar = document.querySelector('#btnReiniciar');
-const PALABRA = "CHANCHO";
+const cartasJug1 = document.querySelectorAll('#jugador-1 .carta');
 
+// Saca y devuelve una carta random de cartasSinRepartir 
 function sacarRandom(x) {
     const indice = Math.floor(Math.random() * x.length);
     const carta = x.splice(indice, 1)[0];
     return carta;
 }
 
+// Reparte las cartas del mazo para iniciar una nueva ronda
 function repartir() {
     cartasSinRepartir = [];
     for (let i = 1; i <= jugadores.length; i++) {
@@ -64,7 +67,56 @@ function repartir() {
     revisarChancho();
 }
 
+// Revisa si alguno de los jugadores juntó cuatro cartas iguales y se habilita el botón CHANCHO
+function revisarChancho() {
+    botonChancho.disabled = true;
+
+     jugadores.forEach(function(jugador, i) {
+        if (detectarIguales(jugador)) {
+            if (i === 0) {
+                botonChancho.disabled = false;
+            } else {
+                tocarChancho(jugador.numeroJug);
+                programarBots();
+                
+                botonChancho.disabled = false;
+            }
+        }
+    });
+}
+
+// Devuelve true si el jugador juntó 4 iguales
+function detectarIguales(jugador) {
+    return jugador.carta1 === jugador.carta2 &&
+           jugador.carta1 === jugador.carta3 &&
+           jugador.carta1 === jugador.carta4;
+}
+
+// Devuelve la carta elegida por un jugador determinado
+function obtenerCarta(jugador, pos) {
+    if (pos == 1) return jugador.carta1;
+    if (pos == 2) return jugador.carta2;
+    if (pos == 3) return jugador.carta3;
+    return jugador.carta4;
+}
+
+// Reemplaza la carta número 'pos' de 'jugador' por 'valor'
+function asignarCarta(jugador, pos, valor) {
+    if (pos == 1) { 
+        jugador.carta1 = valor; 
+    } else if (pos == 2) { 
+        jugador.carta2 = valor; 
+    } else if (pos == 3) { 
+        jugador.carta3 = valor; 
+    } else {
+         jugador.carta4 = valor; 
+    }
+}
+
+// Desplaza las cartas elegidas por cada jugador
 function desplazar(posJug1) {
+
+    // Paso 1: decidir qué posición mueve cada jugador (el usuario elige, los bots al azar)
     let posicionesElegidas = [];
     let cartasEnviadas = [];
 
@@ -76,49 +128,28 @@ function desplazar(posJug1) {
             pos = Math.floor(Math.random() * 4) + 1;
         }
         posicionesElegidas.push(pos);
-        cartasEnviadas.push(jugador['carta' + pos]);
+        cartasEnviadas.push(obtenerCarta(jugador, pos));
     });
 
+    // Paso 2: cada jugador reemplaza la carta que desplazó por la que llega de su jugador a la derecha
     jugadores.forEach(function(jugador, i) {
         const indiceDerecha = (i - 1 + jugadores.length) % jugadores.length;
         const posicion = posicionesElegidas[i];
-        jugador['carta' + posicion] = cartasEnviadas[indiceDerecha];
+        const cartaRecibida = cartasEnviadas[indiceDerecha];
+        asignarCarta(jugador, posicion, cartaRecibida);
     });
 
-    for (let i = 1; i<=4; i++) {
-        document.querySelector('#carta-1-' + i).src = './img/cartas/' + jugadores[0]['carta' + i] + '.png';
-    }
+    // Paso 3: Se muestran las cartas actualizadas del usuario
+    document.querySelector('#carta-1-1').src = './img/cartas/' + jugadores[0].carta1 + '.png';
+    document.querySelector('#carta-1-2').src = './img/cartas/' + jugadores[0].carta2 + '.png';
+    document.querySelector('#carta-1-3').src = './img/cartas/' + jugadores[0].carta3 + '.png';
+    document.querySelector('#carta-1-4').src = './img/cartas/' + jugadores[0].carta4 + '.png';
 
     revisarChancho();
-    chequeoBluff();
+    chanchoFalso();
 }
 
-function detectarIguales(jugador) {
-    return jugador.carta1 === jugador.carta2 &&
-    jugador.carta1 === jugador.carta3 &&
-    jugador.carta1 === jugador.carta4;
-}
-
-function revisarChancho() {
-    botonChancho.disabled = true;
-
-     jugadores.forEach(function(jugador, i) {
-        if (detectarIguales(jugador)) {
-            if (i === 0) {
-                // sos vos: solo habilitamos el botón, el click lo disparás vos mismo
-                botonChancho.disabled = false;
-            } else {
-                // es un bot: él mismo dispara la ronda de CHANCHO
-                tocarChancho(jugador.numeroJug);
-                programarBots();
-                
-                // como alguien ya tocó, vos también tenés que poder reaccionar
-                botonChancho.disabled = false;
-            }
-        }
-    });
-}
-
+// Devuelve true si un elemento se encuentra en un array
 function estaEnArray(array, valor) {
     for (let i = 0; i < array.length; i++) {
         if (array[i] === valor) {
@@ -128,56 +159,56 @@ function estaEnArray(array, valor) {
     return false;
 }
 
+// Se van guardando en órden quienes tocan el botón CHANCHO
 function tocarChancho(numeroJugador) {
+    // Evita que se dispare después de que la ronda termine
     if (rondaTerminada) return;
+    // Evita que el mismo jugador se cuente dos veces
     if (estaEnArray(ordenTocaron, numeroJugador)) return;
 
     ordenTocaron.push(numeroJugador);
-
     if (ordenTocaron.length === jugadores.length) {
         resolverRondaChancho();
     }
 }
 
-function programarBots() {
-    jugadores.forEach(function(jugador) {
-        if (jugador.numeroJug !== 1) {
-            const tiempoRandom = (Math.random() * (1 - 0.1) + 0.1) * 1000;
-            setTimeout(function() {
-                tocarChancho(jugador.numeroJug);
-            }, tiempoRandom);
+// Devuelve el objeto correspondiente al jugador 'numero'
+function buscarJugador(numero) {
+    for (let i = 0; i < jugadores.length; i++) {
+        if (jugadores[i].numeroJug === numero) {
+            return jugadores[i];
         }
-    });
+    }
+    return null;
 }
 
+// Resuelve la ronda y agrega una letra a quien perdió
 function resolverRondaChancho() {
     rondaTerminada = true;
-    const numeroUltimo = ordenTocaron[ordenTocaron.length - 1];
-     const jugadorPerdedor = jugadores.find(function(j) {
-        return j.numeroJug === numeroUltimo;
-    });
-    agregarLetra(jugadorPerdedor);
+    const ultimoJug = ordenTocaron[ordenTocaron.length - 1];
+    const perdedor = buscarJugador(ultimoJug);
+    agregarLetra(perdedor);
 }
 
+// Agrega una letra de CHANCHO al perdedor de la ronda
 function agregarLetra(jugador) {
     
-     // Buscamos el contenedor de letras de ESE jugador
+    // Captura el contenedor de letras de 'jugador'
     const letrasDiv = document.querySelector('#letras-' + jugador.numeroJug);
     
-    // Agarramos TODOS los spans (ya no filtramos por "oculta", ahora son todos iguales)
-    const spans = letrasDiv.querySelectorAll('.letra');
+    // Captura los span que forman CHANCHO
+    const palabra = letrasDiv.querySelectorAll('.letra');
     
-    // La cantidad de letras que el jugador ya tiene nos dice qué posición
-    // es la próxima a completar (si ya tiene "CH", la próxima es la posición 2, índice 2 → "A")
+    // Posición de la próxima letra a agregar
     const posicion = jugador.letras.length;
     
-    // Buscamos en la constante PALABRA qué letra corresponde a esa posición
-    const letra = PALABRA[posicion];
+    // Busca en la constante palabraCompleta qué letra corresponde a esa posición
+    const letra = palabraCompleta[posicion];
     
-    // Se la escribimos al span correspondiente (reemplaza el "_")
-    spans[posicion].textContent = letra;
+    // Se la escribe al span correspondiente (reemplaza el "_")
+    palabra[posicion].innerText = letra;
 
-    // Actualizamos el dato del jugador
+    // Actualiza el dato del jugador
     jugador.letras += letra;
 
     if (letra === 'O') {
@@ -189,113 +220,126 @@ function agregarLetra(jugador) {
     }
 }
 
+// Elimina a 'jugador' de la partida
 function eliminado(jugador) {
     
-    // Buscamos el <div> completo de ese jugador (el que tiene id="jugador-X")
+    // Busca el <div> completo de ese jugador (el que tiene id="jugador-X")
     const divJugador = document.querySelector('#jugador-' + jugador.numeroJug);
     
-    // Le agregamos una clase CSS para que se vea "apagado"/distinto
-    // (esta clase la definís vos en el CSS, por ejemplo con opacity o un fondo gris)
+    // Se le agrega una clase CSS para que se vea "apagado"/distinto
     divJugador.classList.add('eliminado');
 
-    // Buscamos la posición de este jugador dentro del array "jugadores"
-    // findIndex es como find, pero devuelve la POSICIÓN en vez del objeto
-    const indice = jugadores.findIndex(function(j) {
-        return j.numeroJug === jugador.numeroJug;
-    });
+    // Busca la posición de este jugador dentro del array "jugadores"
+    let indice = -1;
+    for (let i = 0; i < jugadores.length; i++) {
+        if (jugadores[i].numeroJug === jugador.numeroJug) {
+            indice = i;
+            break;
+        }
+    }
     
-    // Lo sacamos del array de jugadores (splice con 1 saca un solo elemento)
+    // Se saca del array de jugadores
     jugadores.splice(indice, 1);
 
-    // Chequeamos cuántos jugadores quedan
+    // Chequea cuántos jugadores quedan
     if (jugadores.length >= 2) {
         
         // Si quedan 2 o más, la partida sigue.
-        // Reseteamos las variables de la ronda de Chancho
+        // Resetea las variables de la ronda de Chancho
         ordenTocaron = [];
         rondaTerminada = false;
         
-        // Repartimos de nuevo para arrancar la próxima ronda
+        // Se reparte de nuevo para arrancar la próxima ronda
         repartir();
         
     } else {
         
         // Si queda 1 solo jugador, ese es el ganador
         const ganador = jugadores[0];
-        document.querySelector('#mensaje').textContent = 
-            'Ganó el jugador ' + ganador.numeroJug + '! ¿Jugamos de nuevo?';
+        document.querySelector('#mensaje').innerText = 
+            'Ganó el jugador ' + ganador.numeroJug + '! ¿Querés jugar de nuevo?';
         
-        // acá después conectamos el botón de reiniciar
+        // Se habilita el botón de reiniciar
         botonReiniciar.style.display = 'inline';
     }
 }
 
-function reiniciar() {
-    
-    // Reseteamos el mazo completo, como al principio
-    cartasSinRepartir = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4];
-    
-    // Reseteamos el array de jugadores, volviendo a crear los 4 desde cero
-    jugadores = [];
-    for (let i = 1; i <= cantidadJug; i++) {
-        const spans = document.querySelectorAll('#letras-' + i + ' .letra');
-        spans.forEach(function(span) {
-            span.textContent = '_';
-        });
-    }
-    
-    // Reseteamos las variables de la ronda de Chancho
-    ordenTocaron = [];
-    rondaTerminada = false;
-    
-
-    for (let i = 1; i <= cantidadJug; i++) {
-        const spans = document.querySelectorAll('#letras-' + i + ' .letra');
-        spans.forEach(function(span) {
-            span.textContent = '_';
-        });
-    }
-    
-    // Sacamos la clase "eliminado" de todos los jugadores
-    // (por si alguno había quedado marcado como eliminado)
-    for (let i = 1; i <= cantidadJug; i++) {
-        document.querySelector('#jugador-' + i).classList.remove('eliminado');
-    }
-    
-    // Mostramos la pantalla de inicio y ocultamos el tablero
-    tablero.style.display = 'none';
-    inicio.style.display = 'block';
+// Hace que los bots toquen el botón CHANCHO (si fue habilitado) en un tiempo random entre 0.5 y 2 segundos
+function programarBots() {
+    jugadores.forEach(function(jugador) {
+        if (jugador.numeroJug !== 1) {
+            const tiempoRandom = (Math.random() * (2 - 0.5) + 0.5) * 1000;
+            setTimeout(function() {
+                tocarChancho(jugador.numeroJug);
+            }, tiempoRandom);
+        }
+    });
 }
 
-function chequeoBluff() {
-    // Si ya hay una ronda de chancho en curso, no interferimos
+// Le permite a los bots una chance de se les active el botón CHANCHO sin tener las 4 iguales, para balancear el juego
+function chanchoFalso() {
+    // Si ya hay una ronda de chancho en curso, no se interfiere
     if (rondaTerminada === false && ordenTocaron.length > 0) return;
 
     jugadores.forEach(function(jugador) {
-        // Los bots son todos menos el jugador 1 (vos)
         if (jugador.numeroJug !== 1) {
             
             // 5% de probabilidad de que ESTE bot decida bluffear en este momento
             const probabilidadBluff = 0.05;
             
             if (Math.random() < probabilidadBluff) {
-                
-                // Como alguien ya tocó CHANCHO (aunque sea mintiendo),
-                // vos también tenés que poder reaccionar, tengas o no 4 iguales
-                botonChancho.disabled = false;
-                
+
                 // El bot "toca" el botón
                 tocarChancho(jugador.numeroJug);
                 
-                // Programamos a los demás bots para que también reaccionen
+                // Se habilita el botón al usuario
+                botonChancho.disabled = false;
+                
+                // Se habilita el botón a los bots
                 programarBots();
             }
         }
     });
 }
 
-const cartasJug1 = document.querySelectorAll('#jugador-1 .carta');
+// Reinicia el juego
+function reiniciar() {
+    
+    // Resetea el mazo completo
+    cartasSinRepartir = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4];
+    
+    // Resetea el array de jugadores y las palabras
+    jugadores = [];
+    for (let i = 1; i <= cantidadJug; i++) {
+        jugadores.push({
+            numeroJug: i,
+            letras: ''
+        });
+    }
+    
+    // Resetea las variables de la ronda de Chancho
+    ordenTocaron = [];
+    rondaTerminada = false;
 
+    // Pone "_" en todas las letras
+    for (let i = 1; i <= cantidadJug; i++) {
+        const spans = document.querySelectorAll('#letras-' + i + ' .letra');
+        spans.forEach(function(span) {
+            span.innerText = '_';
+        });
+    }
+    
+    // Saca la clase "eliminado" de todos los jugadores
+    for (let i = 1; i <= cantidadJug; i++) {
+        document.querySelector('#jugador-' + i).classList.remove('eliminado');
+    }
+    
+    // Muestra la pantalla de inicio y oculta el tablero
+    tablero.style.display = 'none';
+    inicio.style.display = 'block';
+}
+
+// Escucha si el usuario clickea una carta
 cartasJug1.forEach(function(img) {
     img.addEventListener('click', function() {
         // this === img, la carta que clickeó
@@ -304,18 +348,21 @@ cartasJug1.forEach(function(img) {
     });
 });
 
+// Escucha si el usuario tocó Iniciar Partida
 botonInicio.addEventListener('click', function(){
     inicio.style.display = 'none';
     tablero.style.display = 'block';
     repartir();
 });
 
+// Escucha si el usuario tocó el botón CHANCHO
 botonChancho.addEventListener('click', function() {
     botonChancho.disabled = true;
     tocarChancho(1);
     programarBots();
 });
 
+// Escucha si el usuario reinició el juego
 botonReiniciar.addEventListener('click', function() {
     botonReiniciar.style.display = 'none';
     reiniciar();
