@@ -93,7 +93,7 @@ botondados.addEventListener('click', function(e) {
 
     let evento3 = Math.floor(Math.random() * 20) + 1;
 
-    if (evento3 == 1 && puntaje >= 500) {
+    if (evento3 == 1 && puntaje >= 100) {
         puntaje = Math.round(puntaje - (puntaje * 0.15));
         efectoP.innerText = 'Ajo y agua';
         efectoP.style.color = 'gray';

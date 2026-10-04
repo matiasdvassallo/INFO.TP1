@@ -11,7 +11,8 @@ body {
 	background-position: center;
 	background-repeat: repeat;
 	background-color: black;
-	background-image: url(../img/fondos/fondo1.jpeg);
+	background-image: url(../img/fondos/fondo1.png);
+	background-size: 800px 800px;
 }
 /*--------------------BODY----------------------*/
 
@@ -96,10 +97,6 @@ header ul, header ul a {
   	font-style: normal;
 }
 
-.mainLi a {
-	text-decoration: none;
-}
-
 .mainLi {
 	padding: 10px;
 	border: 3px solid red;
@@ -125,20 +122,17 @@ header ul, header ul a {
 #nav2 ul {
 	display: flex;
 	flex-direction: column;
-	list-style: none;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 	gap: 10px;
 }
 
-#ul2 {
-	font-size: 3rem;
+#nav2 li {
+	width: 500px;
+	height: 80px;
 }
 
-#nav2 #mainLi span {
-	background-color: black;
-
-}
 /*--------------------NAV----------------------*/
 
 /*INDEX*/
@@ -178,6 +172,21 @@ header ul, header ul a {
 
 #main-juego1 {
 	text-shadow: 2px 2px 20px black;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#article-chancho {
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1.2rem;
+	line-height: 1.3;
+	width: 92%;
+	background-color: black;
+	border: 3px solid red;
+	text-align: justify;
+	color: red;
 }
 
 #pantInicio {
@@ -188,8 +197,9 @@ header ul, header ul a {
 	font-family: "Press Start 2P", system-ui;
 	font-size: 1.2rem;
 	color: red;
-	margin-top: -70px;
+	margin-top: 50px;
 	margin-bottom: 70px;
+
 }
 
 #pantInicio h1 {
@@ -216,7 +226,7 @@ header ul, header ul a {
 
 /*JUGADOR 1*/
 #jugador-1 {
-	margin-top: -50px;
+	margin-top: 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -349,6 +359,31 @@ header ul, header ul a {
 	text-decoration: 3px solid crimson underline;
 }
 
+#article-dados ul {
+	list-style: none;
+	text-align: start;
+	line-height: 1.5;
+}
+
+#sed span {
+	text-decoration: 3px solid red underline;
+}
+
+#mal-augurio span {
+	color: purple;
+	text-decoration: 3px solid purple underline;
+}
+
+#dracu span {
+	color: gold;
+	text-decoration: 3px solid gold underline;
+}
+
+#ajoyagua span {
+	color: gray;
+	text-decoration: 3px solid gray underline;
+}
+
 aside {
 	background-color: black;
 	border: 3px solid crimson;
@@ -472,6 +507,50 @@ aside h2 {
 	margin: 10px;
 	height: 100px;
 }
+
+#secretos1 #secreto-10 {
+	color: gold;
+	border: 3px solid gold;
+}
 /*-------------------MAIN----------------------*/
 /*SECRETOS*/
 
+/*INFO*/
+#info-nos {
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1.2rem;
+	color: red;
+}
+
+#info-nos div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	gap: 10px;
+	text-align: center;
+	background-color: black;
+	border: 3px solid red;
+	color: red;
+}
+
+#info-nos div p span {
+	text-decoration: 3px solid red underline;
+}
+
+#info-nos article {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	gap: 10px;
+	padding: 10px;
+	text-align: justify;
+	line-height: 1.4;
+	color: crimson;
+	margin-top: 20px;
+	text-shadow: 2px 2px 20px black;
+}
+/*INFO*/
