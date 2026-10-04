@@ -69,6 +69,8 @@ function repartir() {
 
 // Revisa si alguno de los jugadores juntó cuatro cartas iguales y se habilita el botón CHANCHO
 function revisarChancho() {
+    if (ordenTocaron.length > 0) return;
+    
     botonChancho.disabled = true;
     botonChancho.style.color = 'darkred';
     botonChancho.style.border = '3px solid darkred';
@@ -266,6 +268,10 @@ function eliminado(jugador) {
         document.querySelector('#mensaje').innerText = 
             'Ganó el jugador ' + ganador.numeroJug + '! ¿Querés jugar de nuevo?';
         
+        // Calcula el puntaje obtenido: 7 menos las letras que juntó el ganador
+        const puntajeChancho = 7 - ganador.letras.length;
+        guardarPuntajeChancho(puntajeChancho);
+
         // Se habilita el botón de reiniciar
         botonReiniciar.style.display = 'inline';
     }
@@ -346,6 +352,31 @@ function reiniciar() {
     // Muestra la pantalla de inicio y oculta el tablero
     tablero.style.display = 'none';
     inicio.style.display = 'block';
+}
+
+// Guarda un nuevo puntaje de Chancho en el historial de localStorage
+function guardarPuntajeChancho(puntaje) {
+    
+    // Lee lo que ya había guardado
+    let historial = localStorage.getItem('puntajesChancho');
+    
+    if (historial === null) {
+        historial = [];
+    } else {
+        historial = JSON.parse(historial);
+    }
+    
+    // Arma el nuevo registro
+    const nuevoRegistro = {
+        puntaje: puntaje,
+        fecha: new Date().toLocaleDateString()
+    };
+    
+    // Se agrega al array
+    historial.push(nuevoRegistro);
+    
+    // Se convierte de nuevo a JSON y se guarda (reemplazando lo anterior)
+    localStorage.setItem('puntajesChancho', JSON.stringify(historial));
 }
 
 // Escucha si el usuario clickea una carta

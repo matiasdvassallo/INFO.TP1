@@ -664,3 +664,22 @@ aside h2 {
 	text-shadow: 2px 2px 20px black;
 }
 /*INFO*/
+
+/*PUNTAJES*/
+.fila {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.fila p {
+    width: 33%;
+    text-align: center;
+    margin: 0;
+}
+
+.encabezado {
+    font-weight: bold;
+}
+/*PUNTAJES*/
