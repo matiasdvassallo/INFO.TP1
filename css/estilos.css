@@ -671,20 +671,39 @@ aside h2 {
 /*INFO*/
 
 /*PUNTAJES*/
+
+#main-puntajes {
+	margin-top: -35px;
+}
+
+.tablaPuntajes {
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1.2rem;
+	color: red;
+}
+
+.tablaPuntajes h2 {
+	text-decoration: 3px solid red underline;
+}
 .fila {
     display: flex;
     justify-content: space-between;
+	justify-content: center;
+	align-items: center;
     padding: 8px;
-    border-bottom: 1px solid #ccc;
 }
 
 .fila p {
     width: 33%;
     text-align: center;
     margin: 0;
+	background-color: black;
+	padding: 10px;
+	border-bottom: 3px solid darkred;
 }
 
-.encabezado {
-    font-weight: bold;
+#filasChancho, #filasDados, #filasTrivia {
+	text-align: center;
+	text-shadow: 5px 5px 15px black;
 }
 /*PUNTAJES*/
