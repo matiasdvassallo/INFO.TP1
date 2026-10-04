@@ -34,7 +34,3 @@ El principal uso que le di fue para resolver algunos layouts de CSS. Al haber ta
 Pros: 1) Ya me conoce, sabe cómo trabajo, está al tanto de la materia y los requisitos que esta pide por lo que las consultas que le hago siempre tienen una respuesta que me sirve y es veraz. 2) Utilizar CHAT GPT Plus cambia mucho el paradigma de la IA. Es más rápida, más atenta, precavida, utiliza más la memoria registrada, tenés más tiempo para usar el chat sin importar la cantidad de archivos o imágenes que este tenga. 
 
 Contras: 1) El principal contra fue el pasaje del PLUS al Estándar. Ahí directamente la dejé de usar porque no podía intercambiar más de 2 consultas sin que se me bloquee. Es un poco tramposo, ya que te obliga a pagar la membresía.
-
-
-
-nombre del proyecto, integrantes del grupo, datos de materia, descripción general del sitio, descripción y reglas de cada juego, organización de archivos y carpetas, tecnologías utilizadas, descripción de las principales funcionalidades, API utilizada y principales decisiones técnicas.
