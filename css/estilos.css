@@ -364,6 +364,11 @@ header ul, header ul a {
 	text-decoration: 3px solid crimson underline;
 }
 
+#article-dados h2 {
+	text-align: center;
+	text-decoration: 3px solid red underline;
+}
+
 #article-dados ul {
 	list-style: none;
 	text-align: start;

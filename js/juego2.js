@@ -119,9 +119,6 @@ botondados.addEventListener('click', function(e) {
         efectoP.style.color = 'gray';
     };
 
-    //MOSTRAR RESULTADO
-    puntos.innerText = puntaje;
-
     // COMRPOBAR DERROTA
     if (dado1 == 1 && dado2 == 3) {
         titulo.innerText = 'VAMPIPERDISTE!';
@@ -133,8 +130,13 @@ botondados.addEventListener('click', function(e) {
         botondados.style.border = '3px solid gray'
         botondados.style.color = 'gray'
 
+        puntaje = 0
+
         guardarPuntajeDados(0);
     };
+
+        //MOSTRAR RESULTADO
+    puntos.innerText = puntaje;
 
     // FUNCIÓN DE REINICIAR
     reiniciar.addEventListener('click', function(e) {
