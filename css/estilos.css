@@ -616,11 +616,12 @@ aside h2 {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	align-items: center;
 	font-size: 1rem;
 	border: 3px solid crimson;
 	color: crimson;
 	margin: 10px;
-	height: 100px;
+	height: 120px;
 }
 
 #secretos1 #secreto-10 {
@@ -671,7 +672,6 @@ aside h2 {
 /*INFO*/
 
 /*PUNTAJES*/
-
 #main-puntajes {
 	margin-top: -35px;
 }
