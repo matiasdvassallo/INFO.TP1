@@ -251,6 +251,8 @@ function terminarJuego(gano) {
     }
     
     document.querySelector('#puntajeFinal').innerText = 'Puntaje final: ' + puntaje;
+
+    guardarPuntajeTrivia(puntaje);
 }
 
 // Resetea todas las variables del juego a sus valores iniciales, y vuelve a la pantalla de inicio
@@ -266,6 +268,31 @@ function reiniciarPreguntas() {
     
     finPreguntas.style.display = 'none';
     inicioPreguntas.style.display = 'block';
+}
+
+// Guarda un nuevo puntaje de Trivia en el historial de localStorage
+function guardarPuntajeTrivia(puntajeFinal) {
+    
+    // Lee lo que ya había guardado
+    let historial = localStorage.getItem('puntajesTrivia');
+    
+    if (historial === null) {
+        historial = [];
+    } else {
+        historial = JSON.parse(historial);
+    }
+    
+    // Arma el nuevo registro
+    const nuevoRegistro = {
+        puntaje: puntajeFinal,
+        fecha: new Date().toLocaleDateString()
+    };
+    
+    // Lo agrega al array
+    historial.push(nuevoRegistro);
+    
+    // Lo convierte de nuevo a JSON y lo guarda
+    localStorage.setItem('puntajesTrivia', JSON.stringify(historial));
 }
 
 // Escucha de eventos

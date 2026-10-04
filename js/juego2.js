@@ -41,6 +41,26 @@ if (plantarse.disabled == true) {
     plantarse.style.color = 'gray';
 };
 
+function guardarPuntajeDados(puntajeFinal) {
+    
+    let historial = localStorage.getItem('puntajesDados');
+    
+    if (historial === null) {
+        historial = [];
+    } else {
+        historial = JSON.parse(historial);
+    }
+    
+    const nuevoRegistro = {
+        puntaje: puntajeFinal,
+        fecha: new Date().toLocaleDateString()
+    };
+    
+    historial.push(nuevoRegistro);
+    
+    localStorage.setItem('puntajesDados', JSON.stringify(historial));
+}
+
 // FUNCIÓN DE DADOS
 botondados.addEventListener('click', function(e) {
     e.preventDefault()
@@ -112,6 +132,8 @@ botondados.addEventListener('click', function(e) {
         plantarse.style.color = 'gray'
         botondados.style.border = '3px solid gray'
         botondados.style.color = 'gray'
+
+        guardarPuntajeDados(0);
     };
 
     // FUNCIÓN DE REINICIAR
@@ -133,6 +155,8 @@ botondados.addEventListener('click', function(e) {
     botondados.style.border = '3px solid gray'
     botondados.style.color = 'gray'
     let puntajeGuardado = localStorage.setItem('puntaje', puntaje);
+
+    guardarPuntajeDados(puntaje);
 
     let secreto1Condition = localStorage.getItem('secreto1');
     let secreto2Condition = localStorage.getItem('secreto2');
@@ -183,6 +207,8 @@ botondados.addEventListener('click', function(e) {
     });
 
     });
+
+    
 
 
 //--------------------------------------------------------------------------------------JUEGO DADOS
