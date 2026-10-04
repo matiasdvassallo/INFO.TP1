@@ -9,12 +9,12 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-		<title>VJ - Juegp 3</title>
+		<title>VJ - Netflix and Kill</title>
 
 	</head>
 	<body id="body1">
 		<header>
-			<h1><span id="mainh1">Juego 3</span></h1>
+			<h1><span id="mainh1">Netflix and Kill</span></h1>
 			<ul>
 				<li id="inicio"><a href="index.html" target="_self"><span>+ Inicio +</span></a></li>
 			</ul>
@@ -34,6 +34,38 @@
 		</header>
 
 		<main>
+			<!-- Pantalla de inicio: elegir dificultad -->
+			<div id="inicioPreguntas">
+				<h1>Netflix and Kill</h1>
+				<p>Elegí la dificultad:</p>
+				<button class="btnDificultad" id="facil">Fácil</button>
+				<button class="btnDificultad" id="medio">Medio</button>
+				<button class="btnDificultad" id="dificil">Difícil</button>
+			</div>
+
+			<!-- Pantalla de juego -->
+			<div id="juegoPreguntas" style="display:none;">
+				<p id="numeroPregunta">Pregunta 1 de 10</p>
+				<p id="vidas">Vidas: 3</p>
+				<p id="puntaje">Puntaje: 0</p>
+				<p id="tiempo">Tiempo: 10</p>
+				
+				<h2 id="textoPregunta"></h2>
+				
+				<div id="opciones">
+					<button class="opcion" id="opcion-0"></button>
+					<button class="opcion" id="opcion-1"></button>
+					<button class="opcion" id="opcion-2"></button>
+					<button class="opcion" id="opcion-3"></button>
+				</div>
+			</div>
+
+			<!-- Pantalla final -->
+			<div id="finPreguntas" style="display:none;">
+				<h2 id="mensajeFinal"></h2>
+				<p id="puntajeFinal"></p>
+				<button id="btnReiniciarPreguntas">Jugar de nuevo</button>
+			</div>
 		</main>
 
 		<footer>
