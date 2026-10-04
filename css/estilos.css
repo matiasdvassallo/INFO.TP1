@@ -13,6 +13,7 @@ body {
 	background-color: black;
 	background-image: url(../img/fondos/fondo1.png);
 	background-size: 800px 800px;
+	max-width: 1920px;
 }
 /*--------------------BODY----------------------*/
 
