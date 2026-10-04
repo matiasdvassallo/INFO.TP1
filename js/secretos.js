@@ -64,55 +64,55 @@ if (puntaje >= 100) {
     secreto1guardado = localStorage.setItem('secreto1', secreto1Condition);
 }; 
 
-if (puntaje >= 250) {
+if (puntaje >= 200) {
     secreto2.innerText = 'HOLA SOY UN SECRETO 2'
     secreto2Condition = true;
     secreto2guardado = localStorage.setItem('secreto2', secreto2Condition);
 }; 
 
-if (puntaje >= 400) {
+if (puntaje >= 300) {
     secreto3.innerText = 'HOLA SOY UN SECRETO 3'
     secreto3Condition = true;
     secreto3guardado = localStorage.setItem('secreto3', secreto3Condition);
 }; 
 
-if (puntaje >= 650) {
+if (puntaje >= 400) {
     secreto4.innerText = 'HOLA SOY UN SECRETO 4'
     secreto4Condition = true;
     secreto4guardado = localStorage.setItem('secreto4', secreto4Condition);
 }; 
 
-if (puntaje >= 1000) {
+if (puntaje >= 500) {
     secreto5.innerText = 'HOLA SOY UN SECRETO 5'
     secreto5Condition = true;
     secreto5guardado = localStorage.setItem('secreto5', secreto5Condition);
 }; 
 
-if (puntaje >= 1300) {
+if (puntaje >= 600) {
     secreto6.innerText = 'HOLA SOY UN SECRETO 6'
     secreto6Condition = true;
     secreto6guardado = localStorage.setItem('secreto6', secreto6Condition);
 }; 
 
-if (puntaje >= 1600) {
+if (puntaje >= 700) {
     secreto7.innerText = 'HOLA SOY UN SECRETO 7'
     secreto7Condition = true;
     secreto7guardado = localStorage.setItem('secreto7', secreto7Condition);
 }; 
 
-if (puntaje >= 2000) {
+if (puntaje >= 850) {
     secreto8.innerText = 'HOLA SOY UN SECRETO 8'
     secreto8Condition = true;
     secreto8guardado = localStorage.setItem('secreto8', secreto8Condition);
 }; 
 
-if (puntaje >= 3000) {
+if (puntaje >= 1000) {
     secreto9.innerText = 'HOLA SOY UN SECRETO 9'
     secreto9Condition = true;
     secreto9guardado = localStorage.setItem('secreto9', secreto9Condition);
 }; 
 
-if (puntaje >= 4500) {
+if (puntaje >= 1300) {
     secreto10.innerText = 'HOLA SOY UN SECRETO 10'
     secreto10Condition = true;
     secreto10guardado = localStorage.setItem('secreto10', secreto10Condition);
