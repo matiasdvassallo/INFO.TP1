@@ -1,4 +1,4 @@
-#TP 1 ("VampiJuegos") - Informática General - Cátedra Drelichman TN - UNA (Área Transdepartamental de Artes Multimediales) - Sofia Suarez y Matías Vassallo
+# TP 1 ("VampiJuegos") - Informática General - Cátedra Drelichman TN - UNA (Área Transdepartamental de Artes Multimediales) - Sofia Suarez y Matías Vassallo
 
 Decidimos realizar un página con una estética retro 8-bit gótica. Estilo "Castlevania". Esta fue la piedra angular de todo el proyecto. Ya que tanto la estructura HTML, el CSS y las operaciones ej JS fueran desarrolladas en base a esta. Priman colores fuertes pero sobrios, como los rojos sangres, el dorado, morados y grises. Además de la utlización de tipografías y boxes que acompañen la temática que queríamos para la web.
 
