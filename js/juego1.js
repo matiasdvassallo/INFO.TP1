@@ -69,6 +69,8 @@ function repartir() {
 
 // Revisa si alguno de los jugadores juntó cuatro cartas iguales y se habilita el botón CHANCHO
 function revisarChancho() {
+    if (ordenTocaron.length > 0) return;
+    
     botonChancho.disabled = true;
     botonChancho.style.color = 'darkred';
     botonChancho.style.border = '3px solid darkred';
