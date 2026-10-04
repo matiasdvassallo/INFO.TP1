@@ -69,19 +69,28 @@ function repartir() {
 
 // Revisa si alguno de los jugadores juntó cuatro cartas iguales y se habilita el botón CHANCHO
 function revisarChancho() {
+
+    console.log('--- revisarChancho ---');
+    console.log('ordenTocaron:', ordenTocaron);
+    console.log('rondaTerminada:', rondaTerminada);
+    console.log('botón disabled:', botonChancho.disabled);
+    console.log('tus 4 cartas:', jugadores[0].carta1, jugadores[0].carta2, jugadores[0].carta3, jugadores[0].carta4);
+    console.log('¿tenés 4 iguales?', detectarIguales(jugadores[0]));
+
     if (ordenTocaron.length > 0) return;
-    
+
     botonChancho.disabled = true;
     botonChancho.style.color = 'darkred';
     botonChancho.style.border = '3px solid darkred';
 
-     jugadores.forEach(function(jugador, i) {
+    for (let i = 0; i < jugadores.length; i++) {
+    const jugador = jugadores[i];
+        
         if (detectarIguales(jugador)) {
             if (i === 0) {
                 botonChancho.disabled = false;
                 botonChancho.style.color = 'red';
                 botonChancho.style.border = '3px solid red';
-
             } else {
                 tocarChancho(jugador.numeroJug);
                 programarBots();
@@ -90,8 +99,10 @@ function revisarChancho() {
                 botonChancho.style.color = 'red';
                 botonChancho.style.border = '3px solid red';
             }
+            
+            break;
         }
-    });
+    }
 }
 
 // Devuelve true si el jugador juntó 4 iguales
@@ -176,6 +187,7 @@ function tocarChancho(numeroJugador) {
     if (estaEnArray(ordenTocaron, numeroJugador)) return;
 
     ordenTocaron.push(numeroJugador);
+
     if (ordenTocaron.length === jugadores.length) {
         resolverRondaChancho();
     }
