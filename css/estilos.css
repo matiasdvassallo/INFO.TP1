@@ -623,7 +623,7 @@ aside h2 {
 	height: 120px;
 }
 
-#secretos1 #secreto-10 {
+#secretos1 .secreto-10 {
 	color: gold;
 	border: 3px solid gold;
 }
