@@ -70,12 +70,13 @@ function repartir() {
 // Revisa si alguno de los jugadores juntó cuatro cartas iguales y se habilita el botón CHANCHO
 function revisarChancho() {
 
+    /* Pruebas debugging
     console.log('--- revisarChancho ---');
     console.log('ordenTocaron:', ordenTocaron);
     console.log('rondaTerminada:', rondaTerminada);
     console.log('botón disabled:', botonChancho.disabled);
     console.log('tus 4 cartas:', jugadores[0].carta1, jugadores[0].carta2, jugadores[0].carta3, jugadores[0].carta4);
-    console.log('¿tenés 4 iguales?', detectarIguales(jugadores[0]));
+    console.log('¿tenés 4 iguales?', detectarIguales(jugadores[0])); */
 
     if (ordenTocaron.length > 0) return;
 
