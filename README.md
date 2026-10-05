@@ -17,6 +17,9 @@ Para este juego quisimos buscar alguna API con temática de vampiros o de horror
 Esta API solo provee preguntas en inglés, y decidimos no involucrar otra API que las traduzca para no complejizar el proyecto.
 Además, como a veces la API tarda en responder por exceso de solicitudes, agregamos un aviso para esperar unos segundos antes de seguir intentando.
 
+- BACKUP: Se desarrolló un Juego BackUp ya que tuvimos problemas para resolver bugs de último momento del primer juego de Cartas (Chancho Vampiro). Si bien el juego es sencillo, no presenta mayor complejidad en su código, consideramos que era lo mejor que podíamos hacer para resolver el problema.
+          Cartas Malditas: El jugador consta de 4 cartas y 5 vidas. Tiene que ir dando vueltas las cartas, si saca 4 gana 10 puntos, si saca un 1, saca la carta maldita y pierde 1 vida. Al llegar las vidas a 0 termina el intento. Si en el turno no saca la carta maldita, puede reiniciar para dar vuelta las cartas sin tener que sacar todas y perder una vida sin sentido. 
+
 - Organización de archivos:
 
 Se crearon 7 archivos HTML (index.html / juego1.html / juego2.html / juego3.html / puntajes.html / info.html / secretos.html), una carpeta JS con 7 archivos JS (index.js / juego1.js / juego2.js / juego3.js / puntajes.js / info.js / secretos.js) y una carpeta CSS con una única hoja de estilos (estilos.css). Para las imágenes utilizadas se creó una carpeta "img" donde se crearon 4 subcarpetas (cartas / favicon / fondos / dados). Por último, un archivo README.
@@ -41,7 +44,7 @@ El principal uso que le di fue para resolver algunos layouts de CSS. Al haber ta
 
 Pros: 1) Ya me conoce, sabe cómo trabajo, está al tanto de la materia y los requisitos que esta pide por lo que las consultas que le hago siempre tienen una respuesta que me sirve y es veraz. 2) Utilizar CHAT GPT Plus cambia mucho el paradigma de la IA. Es más rápida, más atenta, precavida, utiliza más la memoria registrada, tenés más tiempo para usar el chat sin importar la cantidad de archivos o imágenes que este tenga. 
 
-Contras: 1) El principal contra fue el pasaje del PLUS al Estándar. Ahí directamente la dejé de usar porque no podía intercambiar más de 2 consultas sin que se me bloquee. Es un poco tramposo, ya que te obliga a pagar la membresía.
+Contras: 1) El principal contra fue el pasaje del PLUS al Estándar. Ahí directamente la dejé de usar porque no podía intercambiar más de 2 consultas sin que se me bloquee. Es un poco tramposo, ya que te obliga a pagar la membresía. El problema de empezar un nuevo chat es que no captura toda la memoria registrada y las respuestas no son "a medida"
 
 Sofía: Utilicé Claude (versión gratuita). La utilicé para que me sugiera una forma de estructurar el HTML del juego de cartas y la trivia, y para que me ayude a desarrollar sus respectivas funciones en JS. En el caso del juego de cartas, me tomé el tiempo antes de desarrollar las reglas y un texto con algo de pseudocódigo de cómo tendría que funcionar el juego, y a partir de ahí me fui ayudando con la IA para desarrollarlo en JS. En el caso de la trivia, la IA me ayudó a entender cómo interactuar con la API, qué me devuelve, cómo decodificar los símbolos extraños, y a desarrollar las distintas funciones. Siempre pedí que fuera explicativa, que se mantuviera en los parámetros de lo que aprendí, busqué que no complejice demás el desarrollo y me tomé el tiempo de entender y ajustar el código.
 
