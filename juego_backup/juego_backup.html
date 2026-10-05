@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">	
+
+		<link rel="stylesheet" type="text/css" href="../css/estilos.css">
+		<link rel="icon" href="../img/favicon/favicon.png">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+		<title>VJ - Cartas Malditas (Backup)</title>
+
+	</head>
+	<body id="body1">
+		<header>
+			<h1><span id="mainh1">VampiJuegos</span></h1>
+			<ul>
+				<li id="inicio"><a href="../index.html" target="_self"><span>+ Inicio +</span></a></li>
+			</ul>
+				<nav id="nav1">
+					<ul>
+							<li class="mainLi" id="juegosnav"><a href="#" target="_self">Juegos</a></li>
+							<li class="mainLi"><a href="../puntajes.html" target="_self">Puntajes</a></li>
+							<li class="mainLi"><a href="../info.html" target="_self">Info!</a></li>
+							<li class="mainLi"><a href="../secretos.html" target="self">Secretos</a></li>
+					</ul>
+				</nav>
+				<div id="nav2">
+					<ul id="ul2">
+					<!--ACA VA UN MENU QUE APARECE AL HACER CLICK EN 'JUEGOS' Y DESPLEGA LOS LINKS A LOS RESPECTIVOS JUEGOS-->
+					</ul>
+				</div>
+		</header>
+        <main id="main-backup">
+            
+            <article id="reglas-backup">
+                <h2>Cartas Malditas</h2>
+                <p> Se brindarán 4 cartas dadas vuelta. El jugador deberá elegir las cartas y darlas vueltas para revelar su puntaje. Se irán acumulando puntos hasta que salga la carta maldita. Al salir la carta maldita, se pierde una vida.</p>
+                <p> El jugador cuenta con 5 vidas al empezar! Si las vidas llegan a 0 pierde.</p>
+				<p id="vidas"> Vidas: 5</p>
+            </article>
+            <div id="box-cartas-backup">
+                <section id="cartas-backup">
+                    <img class="carta" id="carta1" src="../img/cartas/dorso.png" alt="Dorso de la carta">
+                    <img class="carta" id="carta2 "src="../img/cartas/dorso.png" alt="Dorso de la carta">
+                    <img class="carta" id="carta3" src="../img/cartas/dorso.png" alt="Dorso de la carta">
+                    <img class="carta" id="carta3" src="../img/cartas/dorso.png" alt="Dorso de la carta">
+                </section>
+                <section id="puntaje-backup">
+                    <h2 id="titulo-backup">Puntaje</h2>
+                    <p id="puntos-backup"><span>0</span></p>
+                    <button id="reiniciar-backup" disabled>Reiniciar</button>
+                </section>
+            </div>
+        </main>
+        <script src="juego_backup.js"></script>
+    </body>
+    </html>

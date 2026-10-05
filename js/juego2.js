@@ -9,7 +9,8 @@ juegos.addEventListener('click', (e) => {
     if (menu == false) {
     navdos.innerHTML = '<li class="mainLi"><a href="juego1.html" target="_self"><span>Chancho va(mpiro)</span></a></li>' +
 			            '<li class="mainLi"><a href="juego2.html" target="_self"><span>Dados Sangrientos</span></a></li>' +
-						'<li class="mainLi"><a href="juego3.html" target="_self"><span>Netflix and Kill</span></a></li>';
+						'<li class="mainLi"><a href="juego3.html" target="_self"><span>Netflix and Kill</span></a></li>' +
+                        '<li class="mainLi""><a href="juego_backup/juego_backup.html" target="_self"><span>(Juego Backup)</span></a></li>';
     menu = true;
     } else {
         navdos.innerHTML = '';
