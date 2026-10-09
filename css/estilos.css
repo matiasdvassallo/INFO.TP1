@@ -220,12 +220,8 @@ header ul, header ul a {
 	padding: 15px;
 }
 
-#pantInicio button:hover {
+#btnIniciar:hover, #btnReiniciar:hover {
 	color: red;
-}
-
-#pantInicio button:active {
-	color: darkred;
 }
 
 /*JUGADOR 1*/
@@ -272,6 +268,10 @@ header ul, header ul a {
 	margin-top: 20px;
 	color: darkred;
 	background-color: black;
+}
+
+#btnReiniciar:hover {
+	color: red;
 }
 /*JUGADOR 1*/
 

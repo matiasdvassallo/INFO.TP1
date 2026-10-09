@@ -78,8 +78,8 @@ botondados.addEventListener('click', function(e) {
     let dado2 = Math.floor(Math.random() * 6) + 1;
 
     // DADOS IMG
-    imgdado1.src = 'img/fotos/dados/dado' + dado1 + '.png';
-    imgdado2.src = 'img/fotos/dados/dado' + dado2 + '.png';
+    imgdado1.src = 'img/dados/dado' + dado1 + '.png';
+    imgdado2.src = 'img/dados/dado' + dado2 + '.png';
 
     // SUAMR PUNTAJE
     puntaje += dado1 + dado2;
@@ -95,10 +95,10 @@ botondados.addEventListener('click', function(e) {
 
     } else if (evento == 3) {
         dado2 = 3;
-        imgdado2.src = 'img/fotos/dados/dado' + dado2 + '.png';
+        imgdado2.src = 'img/dados/dado' + dado2 + '.png';
         efectoP.innerText = 'Mal Presagio';
         efectoP.style.color = 'purple';
-        imgdado2.src = 'img/fotos/dados/MalPresagio.png';
+        imgdado2.src = 'img/dados/malpresagio.png';
     } else {
         efectoP.innerText = 'Noche Tranquila';
         efectoP.style.color = '#47415d';

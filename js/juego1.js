@@ -175,8 +175,8 @@ function elegirBot(jug){
 function desplazar(posJug1) {
 
     botonChancho.disabled = true;
-    botonChancho.style.color = 'darkred';
-    botonChancho.style.border = '3px solid darkred';
+    //botonChancho.style.color = 'darkred';
+    //botonChancho.style.border = '3px solid darkred';
 
     // Paso 1: decidir qué posición mueve cada jugador (el usuario elige, los bots al azar)
     let posicionesElegidas = [];
@@ -302,7 +302,6 @@ function eliminado(jugador) {
         document.querySelector('#mensajeFinal').innerText = '¡Perdiste! ¿Querés jugar de nuevo?';
 
         // Se habilita el botón de reiniciar
-        botonReiniciar.style.display = 'inline';
 
     // Si se elimina un bot
     } else { 
