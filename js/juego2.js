@@ -27,21 +27,34 @@ let plantarse = document.querySelector('#plantarse');
 let puntos = document.querySelector('#puntos-sangrientos');
 let imgdado1 = document.querySelector('#img-dado1');
 let imgdado2 = document.querySelector('#img-dado2');
-let titulo = document.querySelector('#titulo-dados');
+let texto = document.querySelector('#titulo-dados');
 let reiniciar = document.querySelector('#reiniciar');
+let efectoP = document.querySelector('#efecto-p');
 
 let puntaje = 0;
-botondados.disabled = false;
-plantarse.disabled = true;
+
 let vampiplantarse = false;
 
-let efectoP = document.querySelector('#efecto-p')
+plantarse.style.border = '3px solid gray';
+plantarse.style.color = 'gray';
 
-if (plantarse.disabled == true) {
-    plantarse.style.border = '3px solid gray';
-    plantarse.style.color = 'gray';
-};
+// FUNCIÓN COMPROBAR DERROTA
+function comprobarDerrota(dado1, dado2) {
+    if (dado1 == 1 && dado2 == 3) {
+        texto.innerText = 'VAMPIPERDISTE!';
+        plantarse.disabled = true;
+        botondados.disabled = true;
+        reiniciar.hidden = false;
+        plantarse.style.border = '3px solid gray'
+        plantarse.style.color = 'gray'
+        botondados.style.border = '3px solid gray'
+        botondados.style.color = 'gray'
+        puntaje = 0
+        guardarPuntajeDados(0);
+    };
+}
 
+// FUNCIÓN GUARDAR PUNTOS PARA PAG. PUNTAJES
 function guardarPuntajeDados(puntajeFinal) {
     
     let historial = localStorage.getItem('puntajesDados');
@@ -62,16 +75,21 @@ function guardarPuntajeDados(puntajeFinal) {
     localStorage.setItem('puntajesDados', JSON.stringify(historial));
 }
 
+// FUNCIÓN GUARDAR PUNTAJE HISTORICO
+
+function guardarPuntajeHistorico (punt) {
+    let total = JSON.parse(localStorage.getItem('puntosTotales')) || 0;
+    total += punt;
+    localStorage.setItem('puntosTotales', JSON.stringify(total));
+};
+
 // FUNCIÓN DE DADOS
 botondados.addEventListener('click', function(e) {
-    e.preventDefault()
+    //e.preventDefault()
     
     plantarse.disabled = false;
-
-    if (plantarse.disabled == false) {
-        plantarse.style.border = '3px solid crimson';
-        plantarse.style.color = 'crimson';
-    };
+    plantarse.style.border = '3px solid crimson';
+    plantarse.style.color = 'crimson';
 
     // DATO DE DADOS
     let dado1 = Math.floor(Math.random() * 6) + 1;
@@ -82,84 +100,82 @@ botondados.addEventListener('click', function(e) {
     imgdado2.src = 'img/dados/dado' + dado2 + '.png';
 
     // SUAMR PUNTAJE
-    puntaje += dado1 + dado2;
+    puntaje += Number(`${dado1}${dado2}`);
 
-    // DATO DE EVENTOS
-    let evento = Math.floor(Math.random() * 15) + 1;
+    // DATO DE EFECTOS (PROBABILIDADES)
+    let proba1 = Math.floor(Math.random() * 15) + 1;
+    let proba2 = Math.floor(Math.random() * 20) + 1;
+    let proba3 = Math.floor(Math.random() * 25) + 1;
+    let proba4 = Math.floor(Math.random() * 30) + 1;
 
-    // EVENTOS 
-    if (evento == 1 && puntaje > 0) {
-        puntaje += dado1 + dado2;
+    // EFECTOS 
+
+    // EFECTOS PROBA1
+    if (proba1 == 1 && puntaje > 0) {
+        puntaje += Number(`${dado1}${dado2}`); // x2
         efectoP.innerText = 'Sed de Sangre';
         efectoP.style.color = 'red';
 
-    } else if (evento == 3) {
+    } else if (proba1 == 2) {
         dado2 = 3;
         imgdado2.src = 'img/dados/dado' + dado2 + '.png';
         efectoP.innerText = 'Mal Presagio';
         efectoP.style.color = 'purple';
         imgdado2.src = 'img/dados/malpresagio.png';
+    
     } else {
         efectoP.innerText = 'Noche Tranquila';
         efectoP.style.color = '#47415d';
     };
 
-    let evento2 = Math.floor(Math.random() * 15) + 1;
-
-    if (evento2 == 1 && puntaje > 0 && puntaje <= 1000) {
+    // EFECTOS PROBA2
+    if (proba2 == 1 && puntaje > 0) {
         puntaje *= 2;
         efectoP.innerText = 'Dracubendición!';
         efectoP.style.color = 'gold';
     };
 
-    let evento3 = Math.floor(Math.random() * 20) + 1;
-
-    if (evento3 == 1 && puntaje >= 100) {
+    // EFECTOS PROBA3
+    if (proba3 == 1 && puntaje > 0) {
         puntaje = Math.round(puntaje - (puntaje * 0.15));
         efectoP.innerText = 'Ajo y agua';
         efectoP.style.color = 'gray';
     };
 
-    // COMRPOBAR DERROTA
-    if (dado1 == 1 && dado2 == 3) {
-        titulo.innerText = 'VAMPIPERDISTE!';
-        plantarse.disabled = true;
-        botondados.disabled = true;
-        reiniciar.hidden = false;
-        plantarse.style.border = '3px solid gray'
-        plantarse.style.color = 'gray'
-        botondados.style.border = '3px solid gray'
-        botondados.style.color = 'gray'
+    // EFECTOS PROBA4 
+    if (proba4 == 1 && puntaje > 0) {
+        puntaje = Math.round(puntaje / 2);
+        efectoP.innerText = 'Exposición al Sol';
+        efectoP.style.color = 'orange';
+    }
 
-        puntaje = 0
+    // COMPROBAR DERROTA
+    comprobarDerrota(dado1, dado2);
 
-        guardarPuntajeDados(0);
-    };
-
-        //MOSTRAR RESULTADO
+    //MOSTRAR RESULTADO
     puntos.innerText = puntaje;
 
     // FUNCIÓN DE REINICIAR
-    reiniciar.addEventListener('click', function(e) {
-        location.reload();
-    });
 
-    });
+});
 
-    // FUNCIÓN DE PLANTARSE
-    plantarse.addEventListener ('click', function(e) {
+// FUNCIÓN DE PLANTARSE
+plantarse.addEventListener ('click', function(e) {
     vampiplantarse = true;
-    titulo.innerText = 'Puntos Sangrientos FINALES';
+    texto.innerText = 'Puntos Sangrientos FINALES';
     plantarse.disabled = true;
     botondados.disabled = true;
     reiniciar.hidden = false;
-    plantarse.style.border = '3px solid gray'
-    plantarse.style.color = 'gray'
-    botondados.style.border = '3px solid gray'
-    botondados.style.color = 'gray'
-    let puntajeGuardado = localStorage.setItem('puntaje', puntaje);
+    plantarse.style.border = '3px solid gray';
+    plantarse.style.color = 'gray';
+    botondados.style.border = '3px solid gray';
+    botondados.style.color = 'gray';
+
+    localStorage.setItem('puntaje', puntaje);
 
     guardarPuntajeDados(puntaje);
+
+    guardarPuntajeHistorico(puntaje);
 
     let secreto1Condition = localStorage.getItem('secreto1');
     let secreto2Condition = localStorage.getItem('secreto2');
@@ -171,45 +187,48 @@ botondados.addEventListener('click', function(e) {
     let secreto8Condition = localStorage.getItem('secreto8');
     let secreto9Condition = localStorage.getItem('secreto9');
     let secreto10Condition = localStorage.getItem('secreto10');
+
+    let puntosParaSecretos = JSON.parse(localStorage.getItem('puntosTotales'));
         
     // SISTEMA DE SECRETOS
-    if (puntaje >= 100 && vampiplantarse == true && secreto1Condition == 'false') {
+    if (puntosParaSecretos >= 1000 && vampiplantarse == true && secreto1Condition == 'false') {
         alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
     };
-    if (puntaje >= 200 && vampiplantarse == true && secreto2Condition == 'false') {
+    if (puntosParaSecretos >= 2000 && vampiplantarse == true && secreto2Condition == 'false') {
         alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
     };
-    if (puntaje >= 300 && vampiplantarse == true && secreto3Condition == 'false') {
+    if (puntosParaSecretos >= 3000 && vampiplantarse == true && secreto3Condition == 'false') {
         alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
     };
-    if (puntaje >= 400 && vampiplantarse == true && secreto4Condition == 'false') {
+    if (puntosParaSecretos >= 4000 && vampiplantarse == true && secreto4Condition == 'false') {
         alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
     };
-    if (puntaje >= 500 && vampiplantarse == true && secreto5Condition == 'false') {
+    if (puntosParaSecretos >= 5000 && vampiplantarse == true && secreto5Condition == 'false') {
         alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
     };
-    if (puntaje >= 600 && vampiplantarse == true && secreto6Condition == 'false') {
+    if (puntosParaSecretos >= 6000 && vampiplantarse == true && secreto6Condition == 'false') {
         alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
     };
-    if (puntaje >= 700 && vampiplantarse == true && secreto7Condition == 'false') {
+    if (puntosParaSecretos >= 7000 && vampiplantarse == true && secreto7Condition == 'false') {
         alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
     };
-    if (puntaje >= 850 && vampiplantarse == true && secreto8Condition == 'false') {
+    if (puntosParaSecretos >= 8500 && vampiplantarse == true && secreto8Condition == 'false') {
         alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
     };
-    if (puntaje >= 1000 && vampiplantarse == true && secreto9Condition == 'false') {
+    if (puntosParaSecretos >= 10000 && vampiplantarse == true && secreto9Condition == 'false') {
         alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
     };
-    if (puntaje >= 1300 && vampiplantarse == true && secreto10Condition == 'false') {
+    if (puntosParaSecretos >= 13000 && vampiplantarse == true && secreto10Condition == 'false') {
         alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
     };
+});
 
-    // FUNCIÓN DE REINICIAR
-    reiniciar.addEventListener('click', function(e) {
-        location.reload();
-    });
+// FUNCIÓN DE REINICIAR
+reiniciar.addEventListener('click', function(e) {
+    location.reload();
+});
 
-    });
+
 
     
 
