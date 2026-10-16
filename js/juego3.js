@@ -20,8 +20,38 @@ juegos.addEventListener('click', (e) => {
 });
 //--------------------------------------------------------------------------------------MENU DESPLEGABLE
 
-// Variables
+//------------------------------------------------Declaraciones
 
+// Pantallas
+const inicioPreguntas = document.querySelector('#inicioPreguntas');
+const juegoPreguntas = document.querySelector('#juegoPreguntas');
+const finPreguntas = document.querySelector('#finPreguntas');
+
+// Información
+const textoPregunta = document.querySelector('#textoPregunta');
+const numeroPregunta = document.querySelector('#numeroPregunta');
+const vidasEl = document.querySelector('#vidas');
+const puntajeEl = document.querySelector('#puntaje');
+const tiempoEl = document.querySelector('#tiempo');
+const mensajeFinal = document.querySelector('#mensajeFinal');
+const puntajeFinal = document.querySelector('#puntajeFinal');
+const puntosPorDificultad = {
+    facil: 10,
+    medio: 20,
+    dificil: 30
+};
+
+// Botones
+const botonFacil = document.querySelector('#facil');
+const botonMedio = document.querySelector('#medio');
+const botonDificil = document.querySelector('#dificil');
+const botonReinicio = document.querySelector('#btnReiniciarPreguntas');
+const botonesOpciones = [];
+for (let i = 0; i < 4; i++) {
+    botonesOpciones.push(document.querySelector('#opcion-' + i));
+}
+
+// Variables del juego
 let dificultad = '';
 let preguntas = [];
 let indicePregunta = 0;
@@ -33,35 +63,16 @@ let intervaloTiempo;
 let respuestaCorrectaActual = '';
 let opcionesActuales = ['', '', '', ''];
 
-const puntosPorDificultad = {
-    facil: 10,
-    medio: 20,
-    dificil: 30
-};
+// Limpiador de elementos HTML
+const divDecodificador = document.querySelector('#decodificador');
 
-let inicioPreguntas = document.querySelector('#inicioPreguntas');
-let juegoPreguntas = document.querySelector('#juegoPreguntas');
-let finPreguntas = document.querySelector('#finPreguntas');
-
-let textoPregunta = document.querySelector('#textoPregunta');
-let numeroPreguntaEl = document.querySelector('#numeroPregunta');
-let vidasEl = document.querySelector('#vidas');
-let puntajeEl = document.querySelector('#puntaje');
-let tiempoEl = document.querySelector('#tiempo');
-
-let botonFacil = document.querySelector('#facil');
-let botonMedio = document.querySelector('#medio');
-let botonDificil = document.querySelector('#dificil');
-
-// Funciones
+//------------------------------------------------Funciones
 
 // Trae las 10 preguntas de la API según la dificultad elegida, y arranca la partida
 async function cargarPreguntas(dificultadElegida) {
     
-    // Guarda la dificultad elegida
     dificultad = dificultadElegida;
     
-    // Traduce la dificultad al inglés, que es lo que pide la API
     let dificultadAPI;
     if (dificultadElegida === 'facil') {
         dificultadAPI = 'easy';
@@ -77,7 +88,7 @@ async function cargarPreguntas(dificultadElegida) {
     // Realiza la solicitud y espera la respuesta
     const respuesta = await fetch(url);
 
-    // Convierte el contenido en JSON
+    // Convierte el JSON en objetos y arrays
     const datos = await respuesta.json();
 
     // Si la API no pudo responder bien (por ejemplo, por el límite de pedidos), se avisa y no se sigue, para no romper el resto del juego
@@ -89,32 +100,16 @@ async function cargarPreguntas(dificultadElegida) {
     // Guarda las preguntas
     preguntas = datos.results;
 
-    // Arranca la trivia
     inicioPreguntas.style.display = 'none';
     juegoPreguntas.style.display = 'block';
 
     mostrarPregunta();
 }
 
-// Reemplaza los símbolos HTML raros (&quot;, &#039;, etc.) por su caracter normal
+// Limpia el código HTML del texto
 function decodificarTexto(texto) {
-    let resultado = texto;
-    
-    resultado = resultado.split('&quot;').join('"');
-    resultado = resultado.split('&#039;').join("'");
-    resultado = resultado.split('&rsquo;').join("'");
-    resultado = resultado.split('&lsquo;').join("'");
-    resultado = resultado.split('&rdquo;').join('"');
-    resultado = resultado.split('&ldquo;').join('"');
-    resultado = resultado.split('&amp;').join('&');
-    resultado = resultado.split('&eacute;').join('é');
-    resultado = resultado.split('&iacute;').join('í');
-    resultado = resultado.split('&oacute;').join('ó');
-    resultado = resultado.split('&aacute;').join('á');
-    resultado = resultado.split('&uacute;').join('ú');
-    resultado = resultado.split('&ntilde;').join('ñ');
-    
-    return resultado;
+    divDecodificador.innerHTML = texto;
+    return divDecodificador.innerText;
 }
 
 // Saca un elemento al azar de un array, y lo devuelve
@@ -137,49 +132,37 @@ function mezclarOpciones(correcta, incorrectas) {
 }
 
 // Muestra en pantalla la pregunta actual, sus 4 opciones mezcladas, y arranca el cronómetro
-async function mostrarPregunta() {
+function mostrarPregunta() {
     
     const pregunta = preguntas[indicePregunta];
-    
-    // Decodifica los textos (pregunta, correcta e incorrectas)
     const preguntaTexto = decodificarTexto(pregunta.question);
     const correcta = decodificarTexto(pregunta.correct_answer);
     const incorrecta1 = decodificarTexto(pregunta.incorrect_answers[0]);
     const incorrecta2 = decodificarTexto(pregunta.incorrect_answers[1]);
     const incorrecta3 = decodificarTexto(pregunta.incorrect_answers[2]);
     
-    // Guarda cuál es la correcta, para compararla cuando el jugador responda
     respuestaCorrectaActual = correcta;
-    
-    // Mezcla las 4 opciones
-    const opcionesMezcladas = mezclarOpciones(correcta, [incorrecta1, incorrecta2, incorrecta3]);
+    opcionesActuales = mezclarOpciones(correcta, [incorrecta1, incorrecta2, incorrecta3]);
 
-    // Muestra el texto de la pregunta
     textoPregunta.innerText = preguntaTexto;
-    
-    // Actualiza los textos de arriba (número de pregunta, vidas, puntaje)
-    numeroPreguntaEl.innerText = 'Pregunta ' + (indicePregunta + 1) + ' de ' + preguntas.length;
+    numeroPregunta.innerText = 'Pregunta ' + (indicePregunta + 1) + ' de ' + preguntas.length;
     vidasEl.innerText = 'Vidas: ' + vidas;
     puntajeEl.innerText = 'Puntaje: ' + puntaje;
     
-    opcionesActuales = opcionesMezcladas;
-    
-    for (let i = 0; i < 4; i++) {
-        const boton = document.querySelector('#opcion-' + i);
+    botonesOpciones.forEach((boton, indice) => {
         boton.style.backgroundColor = '';
-        boton.innerText = opcionesMezcladas[i];
-    }
+        boton.style.color = '';
+        boton.innerText = opcionesActuales[indice];
+    });
     
-    // Arranca el cronómetro de 10 segundos
     iniciarTemporizador();
 }
 
-// Arranca un cronómetro de 10 segundos para la pregunta actual
+// Arranca un cronómetro de 15 segundos para la pregunta actual
 function iniciarTemporizador() {
     tiempoRestante = 15;
     tiempoEl.innerText = 'Tiempo: ' + tiempoRestante;
     
-    // Por si quedó un intervalo corriendo de la pregunta anterior, se para
     clearInterval(intervaloTiempo);
     
     intervaloTiempo = setInterval(function() {
@@ -188,7 +171,7 @@ function iniciarTemporizador() {
         
         if (tiempoRestante <= 0) {
             clearInterval(intervaloTiempo);
-            perderVida(); // se acabó el tiempo sin responder, cuenta como fallo
+            perderVida(); 
         }
     }, 1000);
 }
@@ -196,7 +179,6 @@ function iniciarTemporizador() {
 // Compara la opción que eligió el jugador contra la correcta, y suma puntos o resta una vida
 function verificarRespuesta(indiceOpcionElegida) {
     
-    // Apenas el jugador responde, se para el cronómetro
     clearInterval(intervaloTiempo);
     
     const opcionElegida = opcionesActuales[indiceOpcionElegida];
@@ -211,11 +193,12 @@ function verificarRespuesta(indiceOpcionElegida) {
         }
 
     if (opcionElegida === respuestaCorrectaActual) {
-        botonElegido.style.backgroundColor = 'green';
+        botonElegido.style.backgroundColor = 'gold';
         setTimeout(() => sumarPuntos(), 1000);
     } else {
-        botonElegido.style.backgroundColor = 'red';
-        botonCorrecto.style.backgroundColor = 'green';
+        botonElegido.style.backgroundColor = 'darkred';
+        botonElegido.style.color = 'black';
+        botonCorrecto.style.backgroundColor = 'gold';
         setTimeout(() => perderVida(), 1000);
     }
 }
@@ -255,17 +238,17 @@ function siguientePreguntaOFin() {
 }
 
 // Muestra la pantalla final, con el mensaje de victoria o derrota y el puntaje
-function terminarJuego(gano) {
+function terminarJuego(resultado) {
     juegoPreguntas.style.display = 'none';
     finPreguntas.style.display = 'block';
     
-    if (gano) {
-        document.querySelector('#mensajeFinal').innerText = '¡Ganaste!';
+    if (resultado == true) {
+        mensajeFinal.innerText = '¡Ganaste!';
     } else {
-        document.querySelector('#mensajeFinal').innerText = 'Perdiste...';
+        mensajeFinal.innerText = 'Perdiste...';
     }
     
-    document.querySelector('#puntajeFinal').innerText = 'Puntaje final: ' + puntaje;
+    puntajeFinal.innerText = 'Puntaje final: ' + puntaje;
 
     guardarPuntajeTrivia(puntaje);
 }
@@ -277,7 +260,7 @@ function reiniciarPreguntas() {
     indicePregunta = 0;
     vidas = 3;
     puntaje = 0;
-    tiempoRestante = 10;
+    tiempoRestante = 15;
     
     clearInterval(intervaloTiempo);
     
@@ -306,11 +289,11 @@ function guardarPuntajeTrivia(puntajeFinal) {
     // Lo agrega al array
     historial.push(nuevoRegistro);
     
-    // Lo convierte de nuevo a JSON y lo guarda
+    // Lo convierte de nuevo a string JSON y lo guarda
     localStorage.setItem('puntajesTrivia', JSON.stringify(historial));
 }
 
-// Escucha de eventos
+//------------------------------------------------Escuchas de eventos
 
 botonFacil.addEventListener('click', function() {
     cargarPreguntas('facil');
@@ -324,13 +307,12 @@ botonDificil.addEventListener('click', function() {
     cargarPreguntas('dificil');
 });
 
-for (let i = 0; i < 4; i++) {
-    const boton = document.querySelector('#opcion-' + i);    
+botonesOpciones.forEach((boton, indice) => {
     boton.addEventListener('click', function() {
-        verificarRespuesta(i);
-    });
-}
+        verificarRespuesta(indice);
+    })
+})
 
-document.querySelector('#btnReiniciarPreguntas').addEventListener('click', function() {
+botonReinicio.addEventListener('click', function() {
     reiniciarPreguntas();
 });
