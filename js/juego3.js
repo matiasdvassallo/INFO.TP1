@@ -25,6 +25,7 @@ juegos.addEventListener('click', (e) => {
 let dificultad = '';
 let preguntas = [];
 let indicePregunta = 0;
+let indiceCorrectaActual = 0;
 let vidas = 3;
 let puntaje = 0;
 let tiempoRestante = 10;
@@ -141,7 +142,7 @@ async function mostrarPregunta() {
     const pregunta = preguntas[indicePregunta];
     
     // Decodifica los textos (pregunta, correcta e incorrectas)
-    let preguntaTexto = decodificarTexto(pregunta.question);
+    const preguntaTexto = decodificarTexto(pregunta.question);
     const correcta = decodificarTexto(pregunta.correct_answer);
     const incorrecta1 = decodificarTexto(pregunta.incorrect_answers[0]);
     const incorrecta2 = decodificarTexto(pregunta.incorrect_answers[1]);
@@ -152,8 +153,6 @@ async function mostrarPregunta() {
     
     // Mezcla las 4 opciones
     const opcionesMezcladas = mezclarOpciones(correcta, [incorrecta1, incorrecta2, incorrecta3]);
-    
-    preguntaTexto = await traducir(preguntaTexto, 'es');
 
     // Muestra el texto de la pregunta
     textoPregunta.innerText = preguntaTexto;
@@ -167,8 +166,8 @@ async function mostrarPregunta() {
     
     for (let i = 0; i < 4; i++) {
         const boton = document.querySelector('#opcion-' + i);
-        let rta = await traducir(opcionesMezcladas[i], 'es');
-        boton.innerText = rta;
+        boton.style.backgroundColor = '';
+        boton.innerText = opcionesMezcladas[i];
     }
     
     // Arranca el cronómetro de 10 segundos
@@ -177,7 +176,7 @@ async function mostrarPregunta() {
 
 // Arranca un cronómetro de 10 segundos para la pregunta actual
 function iniciarTemporizador() {
-    tiempoRestante = 10;
+    tiempoRestante = 15;
     tiempoEl.innerText = 'Tiempo: ' + tiempoRestante;
     
     // Por si quedó un intervalo corriendo de la pregunta anterior, se para
@@ -195,15 +194,29 @@ function iniciarTemporizador() {
 }
 
 // Compara la opción que eligió el jugador contra la correcta, y suma puntos o resta una vida
-function verificarRespuesta(opcionElegida) {
+function verificarRespuesta(indiceOpcionElegida) {
     
     // Apenas el jugador responde, se para el cronómetro
     clearInterval(intervaloTiempo);
     
+    const opcionElegida = opcionesActuales[indiceOpcionElegida];
+    const botonElegido = document.querySelector('#opcion-' + indiceOpcionElegida);
+    let botonCorrecto;
+
+    for (let i = 0; i < 4; i++) {
+            if (opcionesActuales[i] === respuestaCorrectaActual) {
+                botonCorrecto = document.querySelector('#opcion-' + i);
+                break;
+            }
+        }
+
     if (opcionElegida === respuestaCorrectaActual) {
-        sumarPuntos();
+        botonElegido.style.backgroundColor = 'green';
+        setTimeout(() => sumarPuntos(), 1000);
     } else {
-        perderVida();
+        botonElegido.style.backgroundColor = 'red';
+        botonCorrecto.style.backgroundColor = 'green';
+        setTimeout(() => perderVida(), 1000);
     }
 }
 
@@ -297,24 +310,6 @@ function guardarPuntajeTrivia(puntajeFinal) {
     localStorage.setItem('puntajesTrivia', JSON.stringify(historial));
 }
 
-async function traducir(texto, idioma = 'es') {
-  const response = await fetch('https://libretranslate.com/translate', {
-    method: 'POST',
-    body: JSON.stringify({
-      q: texto,
-      source: 'en',
-      target: idioma
-    }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-  
-  const data = await response.json();
-  console.log(data.translatedText);
-  return data.translatedText;
-}
-
 // Escucha de eventos
 
 botonFacil.addEventListener('click', function() {
@@ -330,11 +325,9 @@ botonDificil.addEventListener('click', function() {
 });
 
 for (let i = 0; i < 4; i++) {
-    const boton = document.querySelector('#opcion-' + i);
-    const posicion = i; 
-    
+    const boton = document.querySelector('#opcion-' + i);    
     boton.addEventListener('click', function() {
-        verificarRespuesta(opcionesActuales[posicion]);
+        verificarRespuesta(i);
     });
 }
 
