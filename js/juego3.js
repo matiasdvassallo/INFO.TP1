@@ -135,15 +135,13 @@ function mezclarOpciones(correcta, incorrectas) {
     return mezcladas;
 }
 
-
-
 // Muestra en pantalla la pregunta actual, sus 4 opciones mezcladas, y arranca el cronómetro
-function mostrarPregunta() {
+async function mostrarPregunta() {
     
     const pregunta = preguntas[indicePregunta];
     
     // Decodifica los textos (pregunta, correcta e incorrectas)
-    const preguntaTexto = decodificarTexto(pregunta.question);
+    let preguntaTexto = decodificarTexto(pregunta.question);
     const correcta = decodificarTexto(pregunta.correct_answer);
     const incorrecta1 = decodificarTexto(pregunta.incorrect_answers[0]);
     const incorrecta2 = decodificarTexto(pregunta.incorrect_answers[1]);
@@ -155,6 +153,8 @@ function mostrarPregunta() {
     // Mezcla las 4 opciones
     const opcionesMezcladas = mezclarOpciones(correcta, [incorrecta1, incorrecta2, incorrecta3]);
     
+    preguntaTexto = await traducir(preguntaTexto, 'es');
+
     // Muestra el texto de la pregunta
     textoPregunta.innerText = preguntaTexto;
     
@@ -167,7 +167,8 @@ function mostrarPregunta() {
     
     for (let i = 0; i < 4; i++) {
         const boton = document.querySelector('#opcion-' + i);
-        boton.innerText = opcionesMezcladas[i];
+        let rta = await traducir(opcionesMezcladas[i], 'es');
+        boton.innerText = rta;
     }
     
     // Arranca el cronómetro de 10 segundos
@@ -294,6 +295,24 @@ function guardarPuntajeTrivia(puntajeFinal) {
     
     // Lo convierte de nuevo a JSON y lo guarda
     localStorage.setItem('puntajesTrivia', JSON.stringify(historial));
+}
+
+async function traducir(texto, idioma = 'es') {
+  const response = await fetch('https://libretranslate.com/translate', {
+    method: 'POST',
+    body: JSON.stringify({
+      q: texto,
+      source: 'en',
+      target: idioma
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  
+  const data = await response.json();
+  console.log(data.translatedText);
+  return data.translatedText;
 }
 
 // Escucha de eventos
