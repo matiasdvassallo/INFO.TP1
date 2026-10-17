@@ -195,6 +195,7 @@ header ul a {
 	border: 3px solid red;
 	text-align: justify;
 	color: red;
+	max-width: 85%;
 }
 
 #pantInicio {
@@ -584,7 +585,7 @@ aside h2 {
 
 #main-secretos {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
@@ -599,12 +600,13 @@ aside h2 {
 	font-size: 1.2rem;
 	line-height: 1.2;
 	text-align: center;
-	padding: 10px
+	padding: 10px;
+	max-width: 85%;
 }
 
 #secretos1 {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
@@ -616,14 +618,15 @@ aside h2 {
 	font-size: 6rem;
 	font-weight: 400;
   	font-style: normal;
-	margin: 50px;
 	text-align: center;
 	text-shadow: 2px 2px 20px black;
+	margin-top: 40px;
+	margin-bottom: 0;
 }
 
 #secretos1 article {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	font-size: 1rem;
@@ -631,27 +634,47 @@ aside h2 {
 	color: crimson;
 	margin: 10px;
 	height: 120px;
-}
-/*-------------------MAIN----------------------*/
-/*SECRETOS*/
-
-/*INFO*/
-#info-nos {
-	font-family: "Press Start 2P", system-ui;
-	font-size: 1.2rem;
-	color: red;
+	max-width: 85%;
 }
 
-#info-nos div {
+#puntos-totales-secretos {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 10px;
+	font-size: 5rem;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "Jacquard 12", system-ui;
+	background-color: crimson;
+	border-bottom: 5px solid black;
+	color: black;
+	margin-bottom: 40px;
+}
+
+/*-------------------MAIN----------------------*/
+/*SECRETOS*/
+
+/*INFO*/
+/*-------------------MAIN----------------------*/
+#info-nos {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: "Press Start 2P", system-ui;
+	font-size: 1.2rem;
+	color: red;
+	text-align: center;
+}
+
+#info-nos section {
 	text-align: center;
 	background-color: black;
 	border: 3px solid red;
 	color: red;
+	max-width: 85%;
+	line-height: 1.2;
 }
 
 #info-nos div p span {
@@ -659,21 +682,20 @@ aside h2 {
 }
 
 #info-nos article {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
 	padding: 10px;
 	text-align: justify;
 	line-height: 1.4;
 	color: crimson;
 	margin-top: 20px;
-	text-shadow: 2px 2px 20px black;
+	text-shadow: 5px 5px 15px black;
+	max-width: 85%;
+	line-height: 1.5;
 }
+/*-------------------MAIN----------------------*/
 /*INFO*/
 
 /*PUNTAJES*/
+/*-------------------MAIN----------------------*/
 #main-puntajes {
 	margin-top: -35px;
 }
@@ -682,11 +704,14 @@ aside h2 {
 	font-family: "Press Start 2P", system-ui;
 	font-size: 1.2rem;
 	color: red;
+	max-width: 85%;
+	margin: 0 auto;
 }
 
 .tablaPuntajes h2 {
 	text-decoration: 3px solid red underline;
 }
+
 .fila {
     display: flex;
 	justify-content: center;
@@ -707,9 +732,10 @@ aside h2 {
 	text-align: center;
 	text-shadow: 5px 5px 15px black;
 }
+/*-------------------MAIN----------------------*/
 /*PUNTAJES*/
 
-/*BACKUP*/
+/*BACKUP*/ /*
 
 #main-backup {
 	display: flex;

@@ -9,8 +9,7 @@ juegos.addEventListener('click', (e) => {
     if (menu == false) {
     navdos.innerHTML = '<li class="mainLi"><a href="juego1.html" target="_self"><span>Chancho va(mpiro)</span></a></li>' +
 			            '<li class="mainLi"><a href="juego2.html" target="_self"><span>Dados Sangrientos</span></a></li>' +
-						'<li class="mainLi"><a href="juego3.html" target="_self"><span>Netflix and Kill</span></a></li>' +
-                        '<li class="mainLi""><a href="juego_backup/juego_backup.html" target="_self"><span>(Juego Backup)</span></a></li>';
+						'<li class="mainLi"><a href="juego3.html" target="_self"><span>Netflix and Kill</span></a></li>';
     menu = true;
     } else {
         navdos.innerHTML = '';
@@ -34,6 +33,8 @@ let secreto7 = document.querySelector('#secreto-7');
 let secreto8 = document.querySelector('#secreto-8');
 let secreto9 = document.querySelector('#secreto-9');
 let secreto10 = document.querySelector('#secreto-10');
+
+let divPuntosTotales = document.querySelector('#puntos-totales-secretos');
 
 let secreto1Condition = false;
 let secreto2Condition = false;
@@ -61,7 +62,7 @@ function obtenerPuntosTotales () {
     return JSON.parse(localStorage.getItem('puntosTotales')) || 0;
 };
 
-// VAMPISECRETOS 1
+// VAMPISECRETOS DESBLOQUEO
 
 if (obtenerPuntosTotales() >= 1000) {
     secreto1.innerText = '1. Desde tiempos inmemoriales que los vampiros son grandes aficionados de los juegos de mesa. Mucha gente cree que los vampiros se pasan todo el tiempo en sus castillos por ser seres solitarios, sin embargo, solo están jugando juegos sin parar. '
@@ -122,5 +123,7 @@ if (obtenerPuntosTotales() >= 13000) {
     secreto10Condition = true;
     secreto10guardado = localStorage.setItem('secreto10', secreto10Condition);
 };
+
+divPuntosTotales.innerText = 'Puntos Totales: ' + obtenerPuntosTotales();
 
 console.log(obtenerPuntosTotales());
