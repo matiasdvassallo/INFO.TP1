@@ -37,7 +37,6 @@ let puntaje = 0;
 
 let tiradasActuales = 0;
 let tiradasAisladas = 0;
-let tiradaAnteriorFueAislada = true;
 
 let vampiplantarse = false;
 
@@ -71,10 +70,7 @@ function aplicarEfectos(dado1, dado2) {
         imgdado2.src = 'img/dados/malpresagio.png';
         efectoP.innerText = 'Mal Presagio';
         efectoP.style.color = 'purple';
-    }/* else {
-        efectoP.innerText = 'Noche Tranquila';
-        efectoP.style.color = '#47415d';
-    }*/
+    }
 
     if (proba2 == 1 && puntaje > 0) {
         puntaje *= 2;
@@ -82,13 +78,13 @@ function aplicarEfectos(dado1, dado2) {
         efectoP.style.color = 'gold';
     }
 
-    if (proba3 == 1 && puntaje > 0) {
+    if (proba3 == 1 && puntaje > 300) {
         puntaje = Math.round(puntaje - (puntaje * 0.15));
         efectoP.innerText = 'Ajo y agua';
         efectoP.style.color = 'gray';
     }
 
-    if (proba4 == 1 && puntaje > 0) {
+    if (proba4 == 1 && puntaje >= 1000) {
         puntaje = Math.round(puntaje / 2);
         efectoP.innerText = 'Exposición al Sol';
         efectoP.style.color = 'orange';
@@ -156,24 +152,29 @@ function verificarSecretos() {
         { puntos: 13000, numero: 10 }
     ];
 
-    puntosParaSecretos.forEach(secreto => {
-        if (puntosTotalesSecretos >= secreto.puntos && vampiplantarse && localStorage.getItem(`secreto${secreto.numero}`) === 'false') {
-            alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-        }
-    });
-}
+puntosParaSecretos.forEach(secreto => {
+
+    if (puntosTotalesSecretos >= secreto.puntos &&
+        localStorage.getItem(`avisoSecreto${secreto.numero}`) !== 'true') {
+
+        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+
+        localStorage.setItem(`avisoSecreto${secreto.numero}`, 'true');
+    }
+
+})};
 
 //------------------------------------------------Escuchas de eventos
 
 botondados.addEventListener('click', function(e) {
-    
+
+    tiradasActuales ++;
+
     plantarse.disabled = false;
     plantarse.style.border = '3px solid crimson';
     plantarse.style.color = 'crimson';
 
     const dados = tirarDados();
-
-    tiradasActuales ++;
 
     // DADOS IMG
     imgdado1.src = 'img/dados/dado' + dados.dado1 + '.png';
@@ -204,15 +205,17 @@ plantarse.addEventListener ('click', function(e) {
     botondados.style.color = 'gray';
 
     // ANTI-TRAMPAS
-    if (tiradasActuales > 1) {
-        tiradaAnteriorFueAislada = false;
-        tiradasAisladas = 0;
-    } else if (tiradaAnteriorFueAislada && tiradasActuales == 1) {
-        tiradasAisladas ++;
-        tiradaAnteriorFueAislada = true;
+    if (tiradasActuales == 1) {
+    tiradasAisladas++;
     } else {
-        tiradasAisladas = 0;
+    tiradasAisladas = 0;
     }
+
+    if (tiradasAisladas == 3) {
+    alert('Funcionó');
+    tiradasAisladas = 0;
+    }
+
 
     localStorage.setItem('puntaje', puntaje);
     guardarPuntajeDados(puntaje);
@@ -222,7 +225,21 @@ plantarse.addEventListener ('click', function(e) {
 });
 
 reiniciar.addEventListener('click', function(e) {
-    location.reload();
+    puntaje = 0;
+    tiradasActuales = 0;
+    puntos.innerText = puntaje;
+    vampiplantarse = false;
+    botondados.disabled = false;
+    botondados.style.border = '3px solid crimson';
+    botondados.style.color = 'crimson'
+    plantarse.disabled = true;
+    reiniciar.hidden = true;
+    imgdado1.src = 'img/dados/dado1.png';
+    imgdado2.src = 'img/dados/dado1.png';
+    texto.innerText = 'Puntos Sangrientos';
+    efectoP.innerText = 'Noche Tranquila';
+    efectoP.style.color = '#47415d'
+
 });
 
 //--------------------------------------------------------------------------------------JUEGO DADOS
