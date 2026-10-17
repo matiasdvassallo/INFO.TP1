@@ -35,6 +35,10 @@ let efectoP = document.querySelector('#efecto-p');
 
 let puntaje = 0;
 
+let tiradasActuales = 0;
+let tiradasAisladas = 0;
+let tiradaAnteriorFueAislada = true;
+
 let vampiplantarse = false;
 
 //HACER DESDE CSS
@@ -169,6 +173,8 @@ botondados.addEventListener('click', function(e) {
 
     const dados = tirarDados();
 
+    tiradasActuales ++;
+
     // DADOS IMG
     imgdado1.src = 'img/dados/dado' + dados.dado1 + '.png';
     imgdado2.src = 'img/dados/dado' + dados.dado2 + '.png';
@@ -196,6 +202,17 @@ plantarse.addEventListener ('click', function(e) {
     plantarse.style.color = 'gray';
     botondados.style.border = '3px solid gray';
     botondados.style.color = 'gray';
+
+    // ANTI-TRAMPAS
+    if (tiradasActuales > 1) {
+        tiradaAnteriorFueAislada = false;
+        tiradasAisladas = 0;
+    } else if (tiradaAnteriorFueAislada && tiradasActuales == 1) {
+        tiradasAisladas ++;
+        tiradaAnteriorFueAislada = true;
+    } else {
+        tiradasAisladas = 0;
+    }
 
     localStorage.setItem('puntaje', puntaje);
     guardarPuntajeDados(puntaje);
