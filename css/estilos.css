@@ -469,7 +469,7 @@ aside h2 {
 /*JUEGO2*/
 
 /*JUEGO3*/
-
+/*-------------------MAIN----------------------*/
 #main-juego3 {
 	display: flex;
 	flex-direction: column;
@@ -481,6 +481,7 @@ aside h2 {
 	font-family: "Press Start 2P", system-ui;
 	color: red;
 	font-size: 1.2rem;
+	line-height: 1;
 }
 
 #inicioPreguntas {
@@ -571,11 +572,11 @@ aside h2 {
 	color: darkred;
 }
 
-#acerta {
+#article-netflix #acerta {
 	color: gold;
-	text-decoration: none;
+	text-decoration: 3px solid gold underline;
 }
-
+/*-------------------MAIN----------------------*/
 /*JUEGO3*/
 
 /*SECRETOS*/
