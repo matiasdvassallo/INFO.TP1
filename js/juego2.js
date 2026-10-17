@@ -22,6 +22,8 @@ juegos.addEventListener('click', (e) => {
 
 //--------------------------------------------------------------------------------------JUEGO DADOS
 
+//------------------------------------------------Declaraciones
+
 let botondados = document.querySelector('#tirardados');
 let plantarse = document.querySelector('#plantarse');
 let puntos = document.querySelector('#puntos-sangrientos');
@@ -35,8 +37,59 @@ let puntaje = 0;
 
 let vampiplantarse = false;
 
+//HACER DESDE CSS
 plantarse.style.border = '3px solid gray';
 plantarse.style.color = 'gray';
+
+//------------------------------------------------Funciones
+
+function tirarDados() {
+    return {
+        dado1: Math.floor(Math.random() * 6) + 1,
+        dado2: Math.floor(Math.random() * 6) + 1
+    };
+}
+
+function aplicarEfectos(dado1, dado2) {
+    efectoP.innerText = 'Noche Tranquila';
+    efectoP.style.color = '#47415d';
+
+    let proba1 = Math.floor(Math.random() * 15) + 1;
+    let proba2 = Math.floor(Math.random() * 20) + 1;
+    let proba3 = Math.floor(Math.random() * 25) + 1;
+    let proba4 = Math.floor(Math.random() * 30) + 1;
+
+    if (proba1 == 1 && puntaje > 0) {
+        puntaje += Number(`${dado1}${dado2}`);
+        efectoP.innerText = 'Sed de Sangre';
+        efectoP.style.color = 'red';
+    } else if (proba1 == 2) {
+        imgdado2.src = 'img/dados/malpresagio.png';
+        efectoP.innerText = 'Mal Presagio';
+        efectoP.style.color = 'purple';
+    }/* else {
+        efectoP.innerText = 'Noche Tranquila';
+        efectoP.style.color = '#47415d';
+    }*/
+
+    if (proba2 == 1 && puntaje > 0) {
+        puntaje *= 2;
+        efectoP.innerText = 'Dracubendición!';
+        efectoP.style.color = 'gold';
+    }
+
+    if (proba3 == 1 && puntaje > 0) {
+        puntaje = Math.round(puntaje - (puntaje * 0.15));
+        efectoP.innerText = 'Ajo y agua';
+        efectoP.style.color = 'gray';
+    }
+
+    if (proba4 == 1 && puntaje > 0) {
+        puntaje = Math.round(puntaje / 2);
+        efectoP.innerText = 'Exposición al Sol';
+        efectoP.style.color = 'orange';
+    }
+}
 
 // FUNCIÓN COMPROBAR DERROTA
 function comprobarDerrota(dado1, dado2) {
@@ -45,11 +98,11 @@ function comprobarDerrota(dado1, dado2) {
         plantarse.disabled = true;
         botondados.disabled = true;
         reiniciar.hidden = false;
-        plantarse.style.border = '3px solid gray'
-        plantarse.style.color = 'gray'
-        botondados.style.border = '3px solid gray'
-        botondados.style.color = 'gray'
-        puntaje = 0
+        plantarse.style.border = '3px solid gray';
+        plantarse.style.color = 'gray';
+        botondados.style.border = '3px solid gray';
+        botondados.style.color = 'gray';
+        puntaje = 0;
         guardarPuntajeDados(0);
     };
 }
@@ -83,154 +136,76 @@ function guardarPuntajeHistorico (punt) {
     localStorage.setItem('puntosTotales', JSON.stringify(total));
 };
 
-// FUNCIÓN DE DADOS
+function verificarSecretos() {
+    const puntosTotalesSecretos = JSON.parse(localStorage.getItem('puntosTotales'));
+    
+    const puntosParaSecretos = [
+        { puntos: 1000, numero: 1 },
+        { puntos: 2000, numero: 2 },
+        { puntos: 3000, numero: 3 },
+        { puntos: 4000, numero: 4 },
+        { puntos: 5000, numero: 5 },
+        { puntos: 6000, numero: 6 },
+        { puntos: 7000, numero: 7 },
+        { puntos: 8500, numero: 8 },
+        { puntos: 10000, numero: 9 },
+        { puntos: 13000, numero: 10 }
+    ];
+
+    puntosParaSecretos.forEach(secreto => {
+        if (puntosTotalesSecretos >= secreto.puntos && vampiplantarse && localStorage.getItem(`secreto${secreto.numero}`) === 'false') {
+            alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
+        }
+    });
+}
+
+//------------------------------------------------Escuchas de eventos
+
 botondados.addEventListener('click', function(e) {
-    //e.preventDefault()
     
     plantarse.disabled = false;
     plantarse.style.border = '3px solid crimson';
     plantarse.style.color = 'crimson';
 
-    // DATO DE DADOS
-    let dado1 = Math.floor(Math.random() * 6) + 1;
-    let dado2 = Math.floor(Math.random() * 6) + 1;
+    const dados = tirarDados();
 
     // DADOS IMG
-    imgdado1.src = 'img/dados/dado' + dado1 + '.png';
-    imgdado2.src = 'img/dados/dado' + dado2 + '.png';
+    imgdado1.src = 'img/dados/dado' + dados.dado1 + '.png';
+    imgdado2.src = 'img/dados/dado' + dados.dado2 + '.png';
 
-    // SUAMR PUNTAJE
-    puntaje += Number(`${dado1}${dado2}`);
+    // SUMAR PUNTAJE
+    puntaje += Number(`${dados.dado1}${dados.dado2}`);
 
-    // DATO DE EFECTOS (PROBABILIDADES)
-    let proba1 = Math.floor(Math.random() * 15) + 1;
-    let proba2 = Math.floor(Math.random() * 20) + 1;
-    let proba3 = Math.floor(Math.random() * 25) + 1;
-    let proba4 = Math.floor(Math.random() * 30) + 1;
-
-    // EFECTOS 
-
-    // EFECTOS PROBA1
-    if (proba1 == 1 && puntaje > 0) {
-        puntaje += Number(`${dado1}${dado2}`); // x2
-        efectoP.innerText = 'Sed de Sangre';
-        efectoP.style.color = 'red';
-
-    } else if (proba1 == 2) {
-        dado2 = 3;
-        imgdado2.src = 'img/dados/dado' + dado2 + '.png';
-        efectoP.innerText = 'Mal Presagio';
-        efectoP.style.color = 'purple';
-        imgdado2.src = 'img/dados/malpresagio.png';
-    
-    } else {
-        efectoP.innerText = 'Noche Tranquila';
-        efectoP.style.color = '#47415d';
-    };
-
-    // EFECTOS PROBA2
-    if (proba2 == 1 && puntaje > 0) {
-        puntaje *= 2;
-        efectoP.innerText = 'Dracubendición!';
-        efectoP.style.color = 'gold';
-    };
-
-    // EFECTOS PROBA3
-    if (proba3 == 1 && puntaje > 0) {
-        puntaje = Math.round(puntaje - (puntaje * 0.15));
-        efectoP.innerText = 'Ajo y agua';
-        efectoP.style.color = 'gray';
-    };
-
-    // EFECTOS PROBA4 
-    if (proba4 == 1 && puntaje > 0) {
-        puntaje = Math.round(puntaje / 2);
-        efectoP.innerText = 'Exposición al Sol';
-        efectoP.style.color = 'orange';
-    }
+    aplicarEfectos(dados.dado1, dados.dado2);
 
     // COMPROBAR DERROTA
-    comprobarDerrota(dado1, dado2);
+    comprobarDerrota(dados.dado1, dados.dado2);
 
     //MOSTRAR RESULTADO
     puntos.innerText = puntaje;
-
-    // FUNCIÓN DE REINICIAR
-
 });
 
-// FUNCIÓN DE PLANTARSE
 plantarse.addEventListener ('click', function(e) {
     vampiplantarse = true;
     texto.innerText = 'Puntos Sangrientos FINALES';
     plantarse.disabled = true;
     botondados.disabled = true;
     reiniciar.hidden = false;
+
     plantarse.style.border = '3px solid gray';
     plantarse.style.color = 'gray';
     botondados.style.border = '3px solid gray';
     botondados.style.color = 'gray';
 
     localStorage.setItem('puntaje', puntaje);
-
     guardarPuntajeDados(puntaje);
-
     guardarPuntajeHistorico(puntaje);
 
-    let secreto1Condition = localStorage.getItem('secreto1');
-    let secreto2Condition = localStorage.getItem('secreto2');
-    let secreto3Condition = localStorage.getItem('secreto3');
-    let secreto4Condition = localStorage.getItem('secreto4');
-    let secreto5Condition = localStorage.getItem('secreto5');
-    let secreto6Condition = localStorage.getItem('secreto6');
-    let secreto7Condition = localStorage.getItem('secreto7');
-    let secreto8Condition = localStorage.getItem('secreto8');
-    let secreto9Condition = localStorage.getItem('secreto9');
-    let secreto10Condition = localStorage.getItem('secreto10');
-
-    let puntosParaSecretos = JSON.parse(localStorage.getItem('puntosTotales'));
-        
-    // SISTEMA DE SECRETOS
-    if (puntosParaSecretos >= 1000 && vampiplantarse == true && secreto1Condition == 'false') {
-        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-    };
-    if (puntosParaSecretos >= 2000 && vampiplantarse == true && secreto2Condition == 'false') {
-        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-    };
-    if (puntosParaSecretos >= 3000 && vampiplantarse == true && secreto3Condition == 'false') {
-        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-    };
-    if (puntosParaSecretos >= 4000 && vampiplantarse == true && secreto4Condition == 'false') {
-        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-    };
-    if (puntosParaSecretos >= 5000 && vampiplantarse == true && secreto5Condition == 'false') {
-        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-    };
-    if (puntosParaSecretos >= 6000 && vampiplantarse == true && secreto6Condition == 'false') {
-        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-    };
-    if (puntosParaSecretos >= 7000 && vampiplantarse == true && secreto7Condition == 'false') {
-        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-    };
-    if (puntosParaSecretos >= 8500 && vampiplantarse == true && secreto8Condition == 'false') {
-        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-    };
-    if (puntosParaSecretos >= 10000 && vampiplantarse == true && secreto9Condition == 'false') {
-        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-    };
-    if (puntosParaSecretos >= 13000 && vampiplantarse == true && secreto10Condition == 'false') {
-        alert('Desbloqueaste un Vampisecreto! Andá a "Secretos" para descubrirlo');
-    };
+    verificarSecretos();
 });
 
-// FUNCIÓN DE REINICIAR
 reiniciar.addEventListener('click', function(e) {
     location.reload();
 });
-
-
-
-    
-
 
 //--------------------------------------------------------------------------------------JUEGO DADOS
