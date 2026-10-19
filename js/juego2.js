@@ -111,7 +111,7 @@ function aplicarQuintaMaldicion() {
         puntosTotales = Math.round(puntosTotales / 2);
         localStorage.setItem('puntosTotales', JSON.stringify(puntosTotales));
 
-        alert('Dividiste tus Puntos Totales a la mitad por codiciosx. Puntos restantes: ' + puntosTotales);
+        alert('Dividiste tus Puntos Totales a la mitad por codiciosx');
     }
 }
 
