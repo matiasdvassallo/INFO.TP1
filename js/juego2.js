@@ -39,6 +39,7 @@ let tiradasActuales = 0;
 let tiradasAisladas = 0;
 
 let vampiplantarse = false;
+let malPresagio = false;
 
 //HACER DESDE CSS
 plantarse.style.border = '3px solid gray';
@@ -54,40 +55,36 @@ function tirarDados() {
 }
 
 function aplicarEfectos(dado1, dado2) {
-    efectoP.innerText = 'Noche Tranquila';
-    efectoP.style.color = '#47415d';
 
     let proba1 = Math.floor(Math.random() * 15) + 1;
     let proba2 = Math.floor(Math.random() * 20) + 1;
     let proba3 = Math.floor(Math.random() * 25) + 1;
     let proba4 = Math.floor(Math.random() * 30) + 1;
 
-    if (proba1 == 1 && puntaje > 0) {
-        puntaje += Number(`${dado1}${dado2}`);
-        efectoP.innerText = 'Sed de Sangre';
-        efectoP.style.color = 'red';
-    } else if (proba1 == 2) {
-        imgdado2.src = 'img/dados/malpresagio.png';
-        efectoP.innerText = 'Mal Presagio';
-        efectoP.style.color = 'purple';
-    }
-
-    if (proba2 == 1 && puntaje > 0) {
-        puntaje *= 2;
-        efectoP.innerText = 'Dracubendición!';
-        efectoP.style.color = 'gold';
-    }
-
-    if (proba3 == 1 && puntaje > 300) {
-        puntaje = Math.round(puntaje - (puntaje * 0.15));
-        efectoP.innerText = 'Ajo y agua';
-        efectoP.style.color = 'gray';
-    }
-
     if (proba4 == 1 && puntaje >= 1000) {
         puntaje = Math.round(puntaje / 2);
         efectoP.innerText = 'Exposición al Sol';
         efectoP.style.color = 'orange';
+    } else if (proba3 == 1 && puntaje > 300) {
+        puntaje = Math.round(puntaje - (puntaje * 0.15));
+        efectoP.innerText = 'Ajo y agua';
+        efectoP.style.color = 'gray';
+    } else if (proba2 == 1 && puntaje > 0) {
+        puntaje *= 2;
+        efectoP.innerText = 'Dracubendición!';
+        efectoP.style.color = 'gold';
+    } else if (proba1 == 1 && puntaje > 0) {
+        puntaje += Number(`${dado1}${dado2}`);
+        efectoP.innerText = 'Sed de Sangre';
+        efectoP.style.color = 'red';
+    } else if (!malPresagio && proba1 == 2) {
+        imgdado2.src = 'img/dados/malpresagio.png';
+        efectoP.innerText = 'Mal Presagio';
+        efectoP.style.color = 'purple';
+        malPresagio = true;
+    } else {
+        efectoP.innerText = 'Noche Tranquila';
+        efectoP.style.color = '#47415d';
     }
 }
 
@@ -105,6 +102,17 @@ function comprobarDerrota(dado1, dado2) {
         puntaje = 0;
         guardarPuntajeDados(0);
     };
+}
+
+function aplicarQuintaMaldicion() {
+    let puntosTotales = JSON.parse(localStorage.getItem('puntosTotales')) || 0;
+
+    if (puntosTotales > 0) {
+        puntosTotales = Math.round(puntosTotales / 2);
+        localStorage.setItem('puntosTotales', JSON.stringify(puntosTotales));
+
+        alert('Dividiste tus Puntos Totales a la mitad por codiciosx. Puntos restantes: ' + puntosTotales);
+    }
 }
 
 // FUNCIÓN GUARDAR PUNTOS PARA PAG. PUNTAJES
@@ -178,8 +186,10 @@ botondados.addEventListener('click', function(e) {
 
     // DADOS IMG
     imgdado1.src = 'img/dados/dado' + dados.dado1 + '.png';
-    imgdado2.src = 'img/dados/dado' + dados.dado2 + '.png';
-
+    if (!malPresagio) {
+        imgdado2.src = 'img/dados/dado' + dados.dado2 + '.png';
+    }
+    
     // SUMAR PUNTAJE
     puntaje += Number(`${dados.dado1}${dados.dado2}`);
 
@@ -204,7 +214,7 @@ plantarse.addEventListener ('click', function(e) {
     botondados.style.border = '3px solid gray';
     botondados.style.color = 'gray';
 
-    // ANTI-TRAMPAS
+    // MALDICIÓN ANTI-TRAMPAS
     if (tiradasActuales == 1) {
     tiradasAisladas++;
     } else {
@@ -212,10 +222,9 @@ plantarse.addEventListener ('click', function(e) {
     }
 
     if (tiradasAisladas == 3) {
-    alert('Funcionó');
+    aplicarQuintaMaldicion();
     tiradasAisladas = 0;
     }
-
 
     localStorage.setItem('puntaje', puntaje);
     guardarPuntajeDados(puntaje);
@@ -227,6 +236,7 @@ plantarse.addEventListener ('click', function(e) {
 reiniciar.addEventListener('click', function(e) {
     puntaje = 0;
     tiradasActuales = 0;
+    malPresagio = false;
     puntos.innerText = puntaje;
     vampiplantarse = false;
     botondados.disabled = false;
