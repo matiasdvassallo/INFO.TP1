@@ -101,7 +101,6 @@ header ul a {
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	gap: 4.5rem;
 	list-style: none;
 }
 
@@ -117,6 +116,11 @@ header ul a {
 	padding: 0.625rem;
 	border: 3px solid red;
 	background-color: black;
+	margin-right: 4.5rem;
+}
+
+.mainLi:last-child {
+	margin-right: 0;
 }
 
 .mainLi a:link {
@@ -145,15 +149,26 @@ header ul a {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	gap: 0.625rem;
 	margin-top: 0.625rem;
 }
 
 #nav2 li {
-	width: 100%;
-	max-width: 500px;
-	height: 80px;
+	margin-bottom: 0.625rem;
 }
+
+#nav2 .mainLi {
+	margin-right: 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#nav2 .mainLi a {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
 /*--------------------NAV----------------------*/
 
 /*INDEX*/
@@ -218,9 +233,12 @@ header ul a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.9375rem;
     width: 100%;
     margin: 1.25rem 0;
+}
+
+#centro button, #centro p {
+    margin-bottom: 0.9375rem; 
 }
 
 #mensajeFinal {
@@ -391,8 +409,11 @@ header ul a {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1.25rem;
 	margin-top: 1.25rem;
+}
+
+#tirada img {
+    margin-right: 1.25rem; 
 }
 
 #efectos {
@@ -452,12 +473,16 @@ aside {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 10px;
 	text-align: center;
+}
+
+aside h2, aside p, aside button {
+	margin-bottom: 0.625rem; 
 }
 
 aside h2 {
 	color: crimson;
+	margin-bottom: 2.1rem;
 }
 
 #dados img {
@@ -474,6 +499,7 @@ aside h2 {
 	padding: 3.125rem;
 	border: 3px solid crimson;
 	margin-top: 0;
+	margin-bottom: 2.7rem;
 	color: crimson;
 	font-size: 2rem;
 	background-color: #47415d;

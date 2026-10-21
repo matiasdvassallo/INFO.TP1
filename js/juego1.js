@@ -455,8 +455,11 @@ botonInicio.addEventListener('click', function(){
 cartasJug1.forEach(function(img) {
     img.addEventListener('click', function() {
         if (ordenTocaron.length > 0) return;
+        img.src = './img/cartas/dorso.png';
         let posicion = this.id[this.id.length - 1]; 
-        desplazar(posicion);
+        setTimeout(function() {
+            desplazar(posicion);
+        }, 120);
     });
 });
 
