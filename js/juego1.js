@@ -45,6 +45,7 @@ const tablero = document.querySelector('#tablero');
 const botonChancho = document.querySelector('#btnChancho');
 const botonReiniciar = document.querySelector('#btnReiniciar');
 const cartasJug1 = document.querySelectorAll('#jugador-1 .carta');
+const msjFinal = document.querySelector('#mensajeFinal');
 
 //------------------------------------------------Funciones
 
@@ -298,9 +299,11 @@ function eliminado(jugador) {
         jugadores = [];
 
         botonChancho.style.display = 'none';
-        document.querySelector('#mensajeFinal').innerText = '¡Perdiste! ¿Querés jugar de nuevo?';
+        msjFinal.style.display = 'block';
+        msjFinal.innerText = '¡Perdiste! ¿Querés jugar de nuevo?';
 
         // Se habilita el botón de reiniciar
+        botonReiniciar.style.display = 'inline';
 
     // Si se elimina un bot
     } else { 
@@ -342,7 +345,8 @@ function eliminado(jugador) {
             let puntajeChancho = 7 - ganador.letras.length;
             guardarPuntajeChancho(puntajeChancho);
 
-            document.querySelector('#mensajeFinal').innerText = '¡Ganaste y obtuviste ' + puntajeChancho + ' puntos! ¿Querés jugar de nuevo?';
+            msjFinal.style.display = 'block';
+            msjFinal.innerText = '¡Ganaste y obtuviste ' + puntajeChancho + ' puntos! ¿Querés jugar de nuevo?';
             
             // Se habilita el botón de reiniciar
             botonReiniciar.style.display = 'inline';
@@ -356,7 +360,7 @@ function cancelarTemporizadoresBots() {
     botsProgramando = false;
 }
 
-// Hace que los bots (salvo numeroJugador) toquen el botón CHANCHO (si fue habilitado) en un tiempo random entre 0.075 y 1.5 segundos
+// Hace que los bots (salvo numeroJugador) toquen el botón CHANCHO (si fue habilitado) en un tiempo random entre 0.075 y 1.2 segundos
 function programarBots(numeroJugador) {
     if (botsProgramando) return;
     if (!rondaTerminada) return;
@@ -364,7 +368,7 @@ function programarBots(numeroJugador) {
 
     jugadores.forEach(function(jugador) {
         if (jugador.numeroJug != 1 && jugador.numeroJug != numeroJugador) {
-            let tiempoRandom = (Math.random() * (1.5 - 0.075) + 0.075) * 1000;
+            let tiempoRandom = (Math.random() * (1.2 - 0.075) + 0.075) * 1000;
             let temporizador = setTimeout(function() {
                 tocarChancho(jugador.numeroJug);
             }, tiempoRandom);
@@ -402,13 +406,14 @@ function reiniciar() {
     // Vuelvo a mostrar a los jugadores eliminados
     for (let i = 1; i <= cantidadJug; i++) {
         let jugador = document.querySelector('#jugador-' + i);
-        jugador.style.display = 'block'; 
+        jugador.style.display = 'flex'; 
     }
     
-    document.querySelector('#mensajeFinal').innerText = '';
+    msjFinal.innerText = '';
+    msjFinal.style.display = 'none';
     // Muestra la pantalla de inicio y oculta el tablero
     tablero.style.display = 'none';
-    inicio.style.display = 'block';
+    inicio.style.display = 'flex';
 }
 
 // Guarda un nuevo puntaje de Chancho en el historial de localStorage
