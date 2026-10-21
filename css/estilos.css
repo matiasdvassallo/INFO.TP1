@@ -23,6 +23,14 @@ body {
 button {
     font-family: inherit;
 }
+
+.tituloJuego {
+	text-decoration: 3px solid;
+	text-shadow: 2px 2px 20px black;
+	font-size: 2.5rem; /* Asegurate de darle un tamaño destacado si lo necesita */
+	color: red;
+	margin-bottom: 1rem;
+}
 /*--------------------BODY----------------------*/
 
 
@@ -240,11 +248,6 @@ header ul a {
 
 }
 
-#pantInicio h1 {
-	text-decoration: 3px solid red underline;
-	text-shadow: 2px 2px 20px black;
-}
-
 #pantInicio button {
 	border: 3px solid red;
 	color: darkred;
@@ -356,7 +359,6 @@ header ul a {
 	display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.875rem;
 	font-size: 1.2rem;
 	color: red;
 }
@@ -376,11 +378,12 @@ header ul a {
 #dados {
 	background-color: black;
 	border: 3px solid crimson;
+	margin-top: 1.5rem;
 	width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
-	gap: 1.25rem;
+	margin-right: 1.875rem;
 }
 
 #tirada {
@@ -396,6 +399,7 @@ header ul a {
 	color: crimson;
 	text-align: center;
 	border: 3px solid crimson;
+	margin-top: 1.2rem;
 	margin-bottom: 1.25rem;
 	padding: 0.9375rem;
 	line-height: 1.3;
@@ -412,11 +416,6 @@ header ul a {
 #efectos h2 {
 	font-size: 1.4rem;
 	text-decoration: 3px solid crimson underline;
-}
-
-#article-dados h2 {
-	text-align: center;
-	text-decoration: 3px solid red underline;
 }
 
 #article-dados ul {
@@ -447,6 +446,7 @@ header ul a {
 aside {
 	background-color: black;
 	border: 3px solid crimson;
+	margin-top: 1.5rem;
 	width: 40%;
 	display: flex;
 	flex-direction: column;
