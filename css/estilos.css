@@ -161,7 +161,8 @@ header ul a {
 }
 
 #info-index {
-	width: 60%;
+	width: 92%;
+	max-width: 40%;
 	text-align: center;
 	line-height: 1.3;
 	border: 3px solid red;
@@ -359,6 +360,19 @@ header ul a {
 	font-size: 1.2rem;
 	color: red;
 }
+
+#article-dados {
+	width: 92%;
+	max-width: 40%;
+	margin: 0 20%;
+	background-color: black;
+	border: 3px solid red;
+	text-align: justify;
+	height: 15rem;
+	padding: 0.5rem 2rem;
+	overflow-y: auto;
+}
+
 #dados {
 	background-color: black;
 	border: 3px solid crimson;
@@ -481,11 +495,24 @@ aside h2 {
 	background-color: #47415d;
 }
 
-#article-dados, #article-chancho, #article-netflix {
+#article-chancho {
 	width: 92%;
+	max-width: 40%;
 	background-color: black;
 	border: 3px solid red;
 	text-align: justify;
+	height: 15rem;
+	padding: 0.5rem 2rem;
+	overflow-y: auto;
+}
+
+#article-netflix {
+	width: 92%;
+	max-width: 40%;
+	background-color: black;
+	border: 3px solid red;
+	text-align: justify;
+	padding: 0.5rem 2rem;
 }
 
 #article-dados p, #article-chancho p, #article-netflix p {
@@ -617,7 +644,8 @@ aside h2 {
 }
 
 #main-secretos article {
-	width: 90%;
+	width: 92%;
+	max-width: 40%;
 	background-color: black;
 	border: 3px solid;
 	color: red;
@@ -625,7 +653,6 @@ aside h2 {
 	line-height: 1.2;
 	text-align: center;
 	padding: 0.625rem;
-	max-width: 85%;
 }
 
 #secretos1 {
@@ -666,7 +693,7 @@ aside h2 {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	font-size: 5rem;
+	font-size: 3rem;
 	font-weight: 400;
 	font-style: normal;
 	font-family: "Jacquard 12", system-ui;
@@ -674,6 +701,7 @@ aside h2 {
 	border-bottom: 5px solid black;
 	color: black;
 	margin-bottom: 2.5rem;
+	padding: 0.5rem 1rem;
 }
 
 /*-------------------MAIN----------------------*/
@@ -692,11 +720,12 @@ aside h2 {
 }
 
 #info-nos section {
+	width: 92%;
+	max-width: 40%;
 	text-align: center;
 	background-color: black;
 	border: 3px solid red;
 	color: red;
-	max-width: 85%;
 	line-height: 1.2;
 }
 
@@ -705,6 +734,8 @@ aside h2 {
 }
 
 #info-nos article {
+	width: 60%;
+	max-width: 40%;
 	padding: 0.625rem;
 	text-align: justify;
 	line-height: 1.4;
