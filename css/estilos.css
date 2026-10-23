@@ -6,6 +6,34 @@
 #contenedor {
 	max-width: 1920px;
 }
+
+/*SCROLLS*/ /*PROBAR COMO FUNCIONA EN COMPU NO MAC*/
+#article-chancho, #article-dados {
+    scrollbar-width: thin;
+    scrollbar-color: darkred black;
+}
+
+/*ANCHO DEL SCROLL*/
+#article-chancho::-webkit-scrollbar, #article-dados::-webkit-scrollbar {
+    width: 15px;
+}
+
+/*FONDO DEL SCROLL*/
+#article-chancho::-webkit-scrollbar-track, #article-dados::-webkit-scrollbar-track {
+    background-color: black;
+}
+
+/*BARRA DESPLAZABLE*/
+#article-chancho::-webkit-scrollbar-thumb, #article-dados::-webkit-scrollbar-thumb {
+    background-color: darkred;
+    border: 2px solid red;
+    border-radius: 0;
+}
+
+/*EFECTO HOVER*/
+#article-chancho::-webkit-scrollbar-thumb:hover, #article-dados::-webkit-scrollbar-thumb:hover {
+    background-color: red;
+}
 /*--------------------UNIVERSAL-------------------*/
 
 
@@ -16,7 +44,7 @@ body {
 	background-repeat: repeat;
 	background-color: black;
 	background-image: url(../img/fondos/fondo1.png);
-	background-size: 800px 800px;
+	background-size: 600px 600px;
 	font-family: "Press Start 2P", system-ui;
 }
 
@@ -208,164 +236,266 @@ header ul a {
 /*-------------------MAIN----------------------*/
 
 #main-juego1 {
-	text-shadow: 2px 2px 20px black;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+    text-shadow: 2px 2px 20px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #article-chancho {
-	font-size: 1.2rem;
-	line-height: 1.3;
-	width: 92%;
-	background-color: black;
-	border: 3px solid red;
-	text-align: justify;
-	color: red;
-	max-width: 85%;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    width: 92%;
+    background-color: black;
+    border: 3px solid red;
+    text-align: justify;
+    color: red;
+    max-width: 85%;
 }
 
-/*CENTRO - BOTONES Y MENSAJE*/
-
-#centro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin: 1.25rem 0;
-}
-
-#centro button, #centro p {
-    margin-bottom: 0.9375rem; 
-}
-
-#mensajeFinal {
-	display: none;
-	color: red;
-	font-size: 1.2rem;
-	text-align: center;
-	line-height: 1.3;
-	border: 3px solid red;
-	background-color: black;
-	padding: 1.25rem;
-	width: 90%;
-	max-width: 600px;
-}
+/*PANTALLA DE INICIO*/
 
 #pantInicio {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	font-size: 1.2rem;
-	color: red;
-	margin-top: 3.125rem;
-	margin-bottom: 4.375rem;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: red;
+    margin-top: 3.125rem;
+    margin-bottom: 4.375rem;
 }
 
 #pantInicio button {
-	border: 3px solid red;
-	color: darkred;
-	background-color: black;
-	font-size: 1rem;
-	padding: 0.9375rem;
+    border: 3px solid red;
+    color: darkred;
+    background-color: black;
+    font-size: 1rem;
+    padding: 0.9375rem;
 }
 
 #btnIniciar:hover, #btnReiniciar:hover {
-	color: red;
+    color: red;
+}
+
+/*TABLERO*/
+
+#tablero {
+    width: 95%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/*DISTRIBUCION GENERAL*/
+
+#zona-jugadores {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
 /*JUGADORES*/
 
 .jugador {
-	margin-top: 0.625rem;
-	display: flex;
-	flex-direction: column;
-	font-size: 1.2rem;
+    margin-top: 0.625rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    min-width: 0;
 }
 
 .jugador img {
-	width: 166px;
-	height: 242px;
+    width: 130px;
+    height: auto;
 }
 
 .jugador h3 {
-	text-decoration: 3px solid underline;
-	background-color: black;
-	padding: 0.625rem;
+    text-decoration: 3px solid underline;
+    background-color: black;
+    padding: 0.625rem;
 }
 
 /*LETRAS*/
 
 .letras {
-	margin-top: 1.25rem;
-	background-color: black;
-	padding: 0.625rem;
+    margin-top: 1.25rem;
+    background-color: black;
+    padding: 0.625rem;
+    white-space: nowrap;
 }
 
-/*JUGADOR HUMANO*/
+/*JUGADOR 1 (VOS)*/
 
-.jugador-humano {
-	justify-content: flex-start;
-	align-items: flex-start;
-	color: red;
+#jugador-1 {
+    width: 45%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: red;
 }
 
 .jugador-humano img {
-	border: 3px solid red;
+    border: 3px solid red;
 }
 
 .jugador-humano h3 {
-	border: 3px solid red;
+    border: 3px solid red;
 }
 
 .letras-humano {
-	border: 3px solid red;
+    border: 3px solid red;
+	font-size: 2rem;
 }
 
-/*JUGADORES BOTS*/
+/*CARTAS DEL JUGADOR*/
+
+.jugador-humano .cartas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 100%;
+}
+
+#mensaje {
+    width: 100%;
+    text-decoration: 3px solid red underline;
+	line-height: 1.5;
+}
+
+/*CENTRO - BOTONES Y MENSAJE*/
+
+#centro {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    min-width: 0;
+}
+
+#centro button, #centro p {
+    margin-bottom: 0.9375rem;
+}
+
+#mensajeFinal {
+    display: none;
+	margin: auto;
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 1.3;
+    border: 3px solid red;
+    background-color: black;
+    padding: 1.25rem;
+    width: 90%;
+    max-width: 600px;
+}
+
+/*BOTS*/
+
+#contenedor-bots {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+    min-width: 0;
+}
 
 .jugador-bot {
-	justify-content: flex-end;
-	align-items: flex-end;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-top: 0;
+}
+
+#jugador-2 {
 	color: crimson;
 }
 
-.jugador-bot img {
-	border: 3px solid crimson;
+#jugador-2 h3 {
+    border: 3px solid crimson;
+    text-decoration: 3px solid crimson underline;
 }
 
-.jugador-bot h3 {
-	border: 3px solid crimson;
-	text-decoration: 3px solid crimson underline;
+#jugador-2 #letras-2 {
+    border: 3px solid crimson;
 }
 
-.letras-bot {
-	border: 3px solid crimson;
+#jugador-3 {
+	color: gold;
 }
 
-/*MENSAJE*/
+#jugador-3 h3 {
+	border: 3px solid gold;
+	text-decoration: 3px solid gold underline;
+}
 
-#mensaje {
-	text-decoration: 3px solid red underline;
+#jugador-3 #letras-3 {
+	color: gold;
+	border: 3px solid gold;
+}
+
+#jugador-4 {
+	color: #0de10d;
+}
+
+#jugador-4 h3 {
+	border: 3px solid #0de10d;
+	text-decoration: 3px solid #0de10d underline;
+}
+
+#jugador-4 #letras-4 {
+	color: #0de10d;
+	border: 3px solid #0de10d;
 }
 
 /*BOTONES*/
 
 #btnChancho, #btnReiniciar {
-	font-size: 1.5rem;
-	border: 3px solid darkred;
-	padding: 0.9375rem;
-	margin-top: 1.25rem;
-	color: darkred;
-	background-color: black;
+    font-size: 1.5rem;
+    border: 3px solid darkred;
+    padding: 0.9375rem;
+    margin-top: 1.25rem;
+    color: darkred;
+    background-color: black;
+}
+
+#btnReiniicar {
+	margin: auto;
+}
+
+/*BOTON CHANCHO PRINCIPAL*/
+
+#btnChancho {
+    font-size: 2rem;
+    padding: 25px 15px;
+    width: 100%;
+    margin-top: 0;
+	margin-left: 3.2rem;
+    background-color: black;
+    color: crimson;
+    border: 5px solid crimson;
+    cursor: pointer;
+}
+
+#btnChancho:hover {
+    color: red;
+    border-color: red;
+    background-color: black;
+}
+
+#btnChancho:disabled {
+    color: darkred;
+    border-color: darkred;
+    cursor: default;
 }
 
 #btnReiniciar:hover {
-	color: red;
+    color: red;
 }
 
 /*-------------------MAIN----------------------*/
@@ -382,8 +512,7 @@ header ul a {
 }
 
 #article-dados {
-	width: 92%;
-	max-width: 40%;
+	max-width: 55%;
 	margin: 0 20%;
 	background-color: black;
 	border: 3px solid red;
@@ -462,6 +591,15 @@ header ul a {
 #ajoyagua span {
 	color: gray;
 	text-decoration: 3px solid gray underline;
+}
+
+#expo span {
+	color: orange;
+	text-decoration: 3px solid orange underline;
+}
+
+#dracumaldicion {
+	color: #0de10d;
 }
 
 aside {

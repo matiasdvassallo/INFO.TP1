@@ -7,9 +7,9 @@ juegos.addEventListener('click', (e) => {
 
     e.preventDefault()
     if (menu == false) {
-    navdos.innerHTML = '<li class="mainLi"><a href="juego1.html" target="_self"><span>Chancho va(mpiro)</span></a></li>' +
-			            '<li class="mainLi"><a href="juego2.html" target="_self"><span>Dados Sangrientos</span></a></li>' +
-						'<li class="mainLi"><a href="juego3.html" target="_self"><span>Netflix and Kill</span></a></li>';
+    navdos.innerHTML = '<li class="mainLi"><a href="juego1.html#article-chancho" target="_self"><span>Chancho va(mpiro)</span></a></li>' +
+			            '<li class="mainLi"><a href="juego2.html#article-dados" target="_self"><span>Dados Sangrientos</span></a></li>' +
+						'<li class="mainLi"><a href="juego3.html#article-netflix" target="_self"><span>Netflix and Kill</span></a></li>';
     menu = true;
     } else {
         navdos.innerHTML = '';
@@ -103,14 +103,24 @@ function comprobarDerrota(dado1, dado2) {
     };
 }
 
-function aplicarQuintaMaldicion() {
+function aplicarDracumaldicion() {
     let puntosTotales = JSON.parse(localStorage.getItem('puntosTotales')) || 0;
 
     if (puntosTotales > 0) {
         puntosTotales = Math.round(puntosTotales / 2);
         localStorage.setItem('puntosTotales', JSON.stringify(puntosTotales));
 
-        alert('Dividiste tus Puntos Totales a la mitad por codiciosx');
+        texto.innerText = 'DRACUMALDITO!';
+        efectoP.innerText = 'Dracumaldición!';
+        texto.style.color = '#0de10d';
+        efectoP.style.color = '#0de10d';
+        reiniciar.style.color = '#0de10d';
+        reiniciar.style.borderColor = '#0de10d';
+        
+        setTimeout(function() {
+        alert('Dividiste tus Puntos Totales a la mitad por codiciosx!');
+        }, 500);
+        
     }
 }
 
@@ -221,7 +231,7 @@ plantarse.addEventListener ('click', function(e) {
     }
 
     if (tiradasAisladas == 3) {
-    aplicarQuintaMaldicion();
+    aplicarDracumaldicion();
     tiradasAisladas = 0;
     }
 
@@ -246,8 +256,11 @@ reiniciar.addEventListener('click', function(e) {
     imgdado1.src = 'img/dados/dado1.png';
     imgdado2.src = 'img/dados/dado1.png';
     texto.innerText = 'Puntos Sangrientos';
+    texto.style.color = 'crimson';
     efectoP.innerText = 'Noche Tranquila';
-    efectoP.style.color = '#47415d'
+    efectoP.style.color = '#47415d';
+    reiniciar.style.color = 'crimson';
+    reiniciar.style.borderColor = 'crimson';
 
 });
 
