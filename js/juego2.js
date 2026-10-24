@@ -64,7 +64,7 @@ function aplicarEfectos(dado1, dado2) {
         puntaje = Math.round(puntaje / 2);
         efectoP.innerText = 'Exposición al Sol';
         efectoP.style.color = 'orange';
-    } else if (proba3 == 1 && puntaje > 300) {
+    } else if (proba3 == 1 && puntaje >= 300) {
         puntaje = Math.round(puntaje - (puntaje * 0.15));
         efectoP.innerText = 'Ajo y agua';
         efectoP.style.color = 'gray';
