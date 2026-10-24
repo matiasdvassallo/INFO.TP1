@@ -7,9 +7,9 @@ juegos.addEventListener('click', (e) => {
 
     e.preventDefault()
     if (menu == false) {
-    navdos.innerHTML = '<li class="mainLi"><a href="juego1.html#article-chancho" target="_self"><span>Chancho va(mpiro)</span></a></li>' +
-			            '<li class="mainLi"><a href="juego2.html#article-dados" target="_self"><span>Dados Sangrientos</span></a></li>' +
-						'<li class="mainLi"><a href="juego3.html#article-netflix" target="_self"><span>Netflix and Kill</span></a></li>';
+    navdos.innerHTML = '<li class="mainLi"><a href="juego1.html#tablero" target="_self"><span>Chancho va(mpiro)</span></a></li>' +
+			            '<li class="mainLi"><a href="juego2.html#dados" target="_self"><span>Dados Sangrientos</span></a></li>' +
+						'<li class="mainLi"><a href="juego3.html#inicioPreguntas" target="_self"><span>Netflix and Kill</span></a></li>';
     menu = true;
     } else {
         navdos.innerHTML = '';
@@ -41,7 +41,7 @@ const inicio = document.querySelector('#pantInicio');
 const botonInicio = document.querySelector('#btnIniciar');
 
 // Tablero de juego
-const tablero = document.querySelector('#tablero');
+const zonaJugadores = document.querySelector('#zona-jugadores');
 const botonChancho = document.querySelector('#btnChancho');
 const botonReiniciar = document.querySelector('#btnReiniciar');
 const cartasJug1 = document.querySelectorAll('#jugador-1 .carta');
@@ -293,12 +293,12 @@ function eliminado(jugador) {
 
         for (let i = 0; i < jugadores.length; i++) {
             let divJugador = document.querySelector('#jugador-' + jugadores[i].numeroJug);
-            divJugador.style.display = 'none';
+            divJugador.style.visibility = 'hidden';
         }
 
         jugadores = [];
 
-        botonChancho.style.display = 'none';
+        botonChancho.style.visibility = 'hidden';
         msjFinal.style.display = 'block';
         msjFinal.innerText = '¡Perdiste! ¿Querés jugar de nuevo?';
 
@@ -311,7 +311,7 @@ function eliminado(jugador) {
         let divJugador = document.querySelector('#jugador-' + jugador.numeroJug);
         
         // Oculto al jugador eliminado
-        divJugador.style.display = 'none';
+        divJugador.style.visibility = 'hidden';
 
         // Busca la posición de este jugador dentro del array "jugadores"
         let indice;
@@ -337,9 +337,9 @@ function eliminado(jugador) {
             let ganador = jugadores[0];
 
             let divGanador = document.querySelector('#jugador-' + ganador.numeroJug);
-            divGanador.style.display = 'none'; 
+            divGanador.style.visibility = 'hidden'; 
 
-            botonChancho.style.display = 'none';
+            botonChancho.style.visibility = 'hidden';
 
             // Calcula el puntaje obtenido: 7 menos las letras que juntó el usuario
             let puntajeChancho = 7 - ganador.letras.length;
@@ -402,17 +402,19 @@ function reiniciar() {
             span.innerText = '_';
         });
     }
+
+    zonaJugadores.style.visibility = '';
     
     // Vuelvo a mostrar a los jugadores eliminados
     for (let i = 1; i <= cantidadJug; i++) {
         let jugador = document.querySelector('#jugador-' + i);
-        jugador.style.display = 'flex'; 
+        jugador.style.visibility = ''; 
     }
     
     msjFinal.innerText = '';
     msjFinal.style.display = 'none';
-    // Muestra la pantalla de inicio y oculta el tablero
-    tablero.style.display = 'none';
+
+    // Muestra la pantalla de inicio
     inicio.style.display = 'flex';
 }
 
@@ -446,8 +448,8 @@ function guardarPuntajeChancho(puntaje) {
 // Escucha si el usuario tocó Iniciar Partida
 botonInicio.addEventListener('click', function(){
     inicio.style.display = 'none';
-    tablero.style.display = 'block';
-    botonChancho.style.display = 'block';
+    zonaJugadores.style.visibility = 'visible';
+    botonChancho.style.visibility = 'visible';
     repartir();
 });
 

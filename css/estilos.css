@@ -257,21 +257,24 @@ header ul a {
 /*PANTALLA DE INICIO*/
 
 #pantInicio {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
     color: red;
-    margin-top: 3.125rem;
-    margin-bottom: 4.375rem;
+    z-index: 10;
 }
 
 #pantInicio button {
     border: 3px solid red;
     color: darkred;
     background-color: black;
-    font-size: 1rem;
+    font-size: 1.5rem;
     padding: 0.9375rem;
 }
 
@@ -285,16 +288,20 @@ header ul a {
     width: 95%;
     max-width: 1600px;
     margin: 0 auto;
+	position: relative;
 }
 
 /*DISTRIBUCION GENERAL*/
 
 #zona-jugadores {
+	visibility: hidden;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 20px;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
 }
 
 /*JUGADORES*/
@@ -329,10 +336,24 @@ header ul a {
 
 /*JUGADOR 1 (VOS)*/
 
+#encabezado-jugador {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+#encabezado-jugador h3 {
+	width: auto;
+	margin: 0;
+}
+
 #jugador-1 {
-    width: 45%;
-    justify-content: flex-start;
-    align-items: flex-start;
+    width: auto;
+	max-width: 552px;
+	min-width: 550px;
+    justify-content: center;
+    align-items: center;
     color: red;
 }
 
@@ -346,7 +367,12 @@ header ul a {
 
 .letras-humano {
     border: 3px solid red;
-	font-size: 2rem;
+	font-size: 1.1rem;
+	margin-top: 0;
+}
+
+#pie-jugador {
+	align-self: center;
 }
 
 /*CARTAS DEL JUGADOR*/
@@ -356,6 +382,7 @@ header ul a {
     flex-wrap: wrap;
     gap: 10px;
     max-width: 100%;
+	min-width: 550px;
 }
 
 #mensaje {
@@ -367,7 +394,8 @@ header ul a {
 /*CENTRO - BOTONES Y MENSAJE*/
 
 #centro {
-    width: 25%;
+	position: absolute;
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -397,19 +425,52 @@ header ul a {
 /*BOTS*/
 
 #contenedor-bots {
-    width: 30%;
+    width: auto;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 15px;
-    min-width: 0;
+    min-width: 620px;
+}
+
+#encabezado-bot {
+	padding: 0;  
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: auto;
+}
+
+#encabezado-bot .letras {
+    margin-top: 0;  
+    padding: 0.3rem;  
+}
+
+#encabezado-bot h3 {
+    width: auto;
+    margin: 0;
 }
 
 .jugador-bot {
     width: 100%;
-    justify-content: flex-end;
-    align-items: flex-end;
+	flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+	gap: 15px;
     margin-top: 0;
+}
+
+.jugador-bot img {
+    width: 80px; 
+    height: auto;
+}
+
+.jugador-bot .cartas {
+    display: flex;
+    gap: 10px;
+    width: auto;
 }
 
 #jugador-2 {
@@ -419,10 +480,12 @@ header ul a {
 #jugador-2 h3 {
     border: 3px solid crimson;
     text-decoration: 3px solid crimson underline;
+	font-size: 1.15rem;
 }
 
 #jugador-2 #letras-2 {
     border: 3px solid crimson;
+	font-size: 1rem;
 }
 
 #jugador-3 {
@@ -432,11 +495,13 @@ header ul a {
 #jugador-3 h3 {
 	border: 3px solid gold;
 	text-decoration: 3px solid gold underline;
+	font-size: 1.15rem;
 }
 
 #jugador-3 #letras-3 {
 	color: gold;
 	border: 3px solid gold;
+	font-size: 1rem;
 }
 
 #jugador-4 {
@@ -446,11 +511,13 @@ header ul a {
 #jugador-4 h3 {
 	border: 3px solid #0de10d;
 	text-decoration: 3px solid #0de10d underline;
+	font-size: 1.15rem;
 }
 
 #jugador-4 #letras-4 {
 	color: #0de10d;
 	border: 3px solid #0de10d;
+	font-size: 1rem;
 }
 
 /*BOTONES*/
@@ -464,18 +531,15 @@ header ul a {
     background-color: black;
 }
 
-#btnReiniicar {
-	margin: auto;
-}
-
 /*BOTON CHANCHO PRINCIPAL*/
 
 #btnChancho {
     font-size: 2rem;
-    padding: 25px 15px;
-    width: 100%;
-    margin-top: 0;
-	margin-left: 3.2rem;
+    padding: 1.5rem;
+    width: 80%;
+	margin-top: 2rem;
+	margin-left: 2rem;
+	margin-right: 2rem;
     background-color: black;
     color: crimson;
     border: 5px solid crimson;
@@ -531,6 +595,11 @@ header ul a {
     flex-direction: column;
     align-items: center;
 	margin-right: 1.875rem;
+	margin-bottom: 2rem;
+}
+
+#pSangrientos {
+	margin-bottom: 2rem;
 }
 
 #tirada {
@@ -706,7 +775,9 @@ aside h2 {
 }
 
 #inicioPreguntas {
-	margin-top: 1.25rem;
+	min-height: 323.767px;
+	margin-top: 7rem;
+	margin-bottom: 2rem;
 	color: red;
 	font-size: 1.2rem;
 	text-align: center;
@@ -763,14 +834,20 @@ aside h2 {
 }
 
 #juegoPreguntas, #finPreguntas {
+	min-height: 323.767px;
 	width: 92%;
-	margin-top: 0.625rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
 	padding: 0.625rem;
 	background-color: black;
 	border: 3px solid red;
 	color: red;
 	font-size: 1.2rem;
 	text-align: center;
+}
+
+#finPreguntas h2, #finPreguntas p {
+	margin-top: 6rem;
 }
 
 #juegoPreguntas button, #finPreguntas button {
@@ -951,76 +1028,3 @@ aside h2 {
 }
 /*-------------------MAIN----------------------*/
 /*PUNTAJES*/
-
-/*BACKUP*/ /*
-
-#main-backup {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-}
-
-#reglas-backup {
-	width: 92%;
-	background-color: black;
-	border: 3px solid purple;
-	color: purple;
-	font-family: "Press Start 2P", system-ui;
-	font-size: 1.2rem;
-	line-height: 1.2;
-}
-
-#reglas-backup h2 {
-	text-decoration: 3px solid purple underline;
-}
-
-#box-cartas-backup {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	gap: 20px;
-}
-
-#cartas-backup img {
-	border: 3px solid purple;
-	margin-top: 50px;
-	margin-right: 20px;
-}
-
-#puntaje-backup {
-	margin-top: 50px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	font-family: "Press Start 2P", system-ui;
-	font-size: 1rem;
-	text-align: center;
-	background-color: black;
-	border: 3px solid purple;
-	color: purple;
-	padding: 10px;
-}
-
-#puntaje-backup p {
-	font-size: 1.2rem;
-}
-#puntos-backup span {
-	border: 3px solid purple;
-	padding: 20px;
-}
-
-#reiniciar-backup {
-	color: #47415d;
-	border: 3px solid #47415d;
-	background-color: gray;
-	margin-top: 20px;
-	font-family: "Press Start 2P", system-ui;
-	font-size: 1rem;
-	padding: 10px;
-}
-
-/*BACKUP*/
