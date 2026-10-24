@@ -118,7 +118,7 @@ function aplicarDracumaldicion() {
         reiniciar.style.borderColor = '#0de10d';
         
         setTimeout(function() {
-        alert('Dividiste tus Puntos Totales a la mitad por codiciosx!');
+        alert('Muajaja! Dividiste tus Puntos Totales a la mitad por codiciosx!');
         }, 500);
         
     }
