@@ -7,7 +7,7 @@
 	max-width: 1920px;
 }
 
-/*SCROLLS*/ /*PROBAR COMO FUNCIONA EN COMPU NO MAC*/
+/*SCROLLS*/ /*QUISIMOS AGREGARLE ESTILOS A LOS SCROLLS, PARA QUE NO CHOQUE VISUALMENTE CON LA ESTÉTICA. SE HIZO USO DE LA IA PARA ESTRUCTURAR ESTE CÓDIGO*/
 #article-chancho, #article-dados {
     scrollbar-width: thin;
     scrollbar-color: darkred black;
@@ -55,7 +55,7 @@ button {
 .tituloJuego {
 	text-decoration: 3px solid;
 	text-shadow: 2px 2px 20px black;
-	font-size: 2.5rem; /* Asegurate de darle un tamaño destacado si lo necesita */
+	font-size: 2.5rem;
 	color: red;
 	margin-bottom: 1rem;
 }
@@ -205,15 +205,13 @@ header ul a {
 #main-index {
 	color: red;
 	font-size: 1.2rem;
-  	font-style: normal;
 	display: flex;
 	justify-content: center;
 	margin-bottom: 6.25rem;
 }
 
 #info-index {
-	width: 92%;
-	max-width: 40%;
+	max-width: 700px;
 	text-align: center;
 	line-height: 1.3;
 	border: 3px solid red;
@@ -244,14 +242,16 @@ header ul a {
 }
 
 #article-chancho {
-    font-size: 1.2rem;
+	font-size: 1.2rem;
     line-height: 1.3;
-    width: 92%;
-    background-color: black;
-    border: 3px solid red;
-    text-align: justify;
-    color: red;
-    max-width: 85%;
+	max-width: 680px;
+	background-color: black;
+	color: red;
+	border: 3px solid red;
+	text-align: justify;
+	height: 15rem;
+	padding: 0.5rem 2rem;
+	overflow-y: auto;
 }
 
 /*PANTALLA DE INICIO*/
@@ -280,12 +280,12 @@ header ul a {
 
 #btnIniciar:hover, #btnReiniciar:hover {
     color: red;
+	border: 3px solid red;
 }
 
 /*TABLERO*/
 
 #tablero {
-    width: 95%;
     max-width: 1600px;
     margin: 0 auto;
 	position: relative;
@@ -418,7 +418,6 @@ header ul a {
     border: 3px solid red;
     background-color: black;
     padding: 1.25rem;
-    width: 90%;
     max-width: 600px;
 }
 
@@ -433,7 +432,7 @@ header ul a {
     min-width: 620px;
 }
 
-#encabezado-bot {
+.encabezado-bot {
 	padding: 0;  
     margin: 0;
     display: flex;
@@ -443,12 +442,12 @@ header ul a {
     width: auto;
 }
 
-#encabezado-bot .letras {
+.encabezado-bot .letras {
     margin-top: 0;  
     padding: 0.3rem;  
 }
 
-#encabezado-bot h3 {
+.encabezado-bot h3 {
     width: auto;
     margin: 0;
 }
@@ -465,6 +464,7 @@ header ul a {
 .jugador-bot img {
     width: 80px; 
     height: auto;
+	border: 2px solid crimson;
 }
 
 .jugador-bot .cartas {
@@ -523,27 +523,18 @@ header ul a {
 /*BOTONES*/
 
 #btnChancho, #btnReiniciar {
-    font-size: 1.5rem;
+    font-size: 2rem;
     border: 3px solid darkred;
     padding: 0.9375rem;
-    margin-top: 1.25rem;
+    margin-top: 2rem;
+	margin-left: 2rem;
+	margin-right: 2rem;
     color: darkred;
     background-color: black;
+	cursor: pointer; /*AYUDA VISUALMENTE A SABER QUE LO PODES CLICKEAR*/
 }
 
 /*BOTON CHANCHO PRINCIPAL*/
-
-#btnChancho {
-    font-size: 2rem;
-    padding: 1.5rem;
-    width: 80%;
-	margin-top: 2rem;
-	margin-left: 2rem;
-	margin-right: 2rem;
-    background-color: black;
-    color: crimson;
-    cursor: pointer;
-}
 
 #btnChancho:hover {
     color: red;
@@ -556,11 +547,6 @@ header ul a {
     border-color: darkred;
     cursor: default;
 }
-
-#btnReiniciar:hover {
-    color: red;
-}
-
 /*-------------------MAIN----------------------*/
 /*JUEGO1*/
 
@@ -575,7 +561,7 @@ header ul a {
 }
 
 #article-dados {
-	max-width: 55%;
+	max-width: 700px;
 	margin: 0 20%;
 	background-color: black;
 	border: 3px solid red;
@@ -595,10 +581,7 @@ header ul a {
     align-items: center;
 	margin-right: 1.875rem;
 	margin-bottom: 2rem;
-}
-
-#pSangrientos {
-	margin-bottom: 2rem;
+	max-width: 700px;
 }
 
 #tirada {
@@ -670,7 +653,7 @@ header ul a {
 	color: #0de10d;
 }
 
-aside {
+#pSangrientos {
 	background-color: black;
 	border: 3px solid crimson;
 	margin-top: 1.5rem;
@@ -680,15 +663,18 @@ aside {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	margin-bottom: 2rem;
+	max-width: 500px;
 }
 
-aside h2, aside p, aside button {
+#pSangrientos h2, #pSangrientos p, #pSangrientos button {
 	margin-bottom: 0.625rem; 
 }
 
-aside h2 {
+#pSangrientos h2 {
 	color: crimson;
 	margin-bottom: 2.1rem;
+	font-size: 2rem;
 }
 
 #dados img {
@@ -719,32 +705,16 @@ aside h2 {
 	background-color: #47415d;
 }
 
+#plantarse {
+	margin-top: 1.5rem;
+}
+
 #plantarse, #reiniciar {
 	border: 3px solid crimson;
 	padding: 0.9375rem;
 	color: crimson;
 	margin-bottom: 1.5625rem;
 	background-color: #47415d;
-}
-
-#article-chancho {
-	width: 92%;
-	max-width: 40%;
-	background-color: black;
-	border: 3px solid red;
-	text-align: justify;
-	height: 15rem;
-	padding: 0.5rem 2rem;
-	overflow-y: auto;
-}
-
-#article-netflix {
-	width: 92%;
-	max-width: 40%;
-	background-color: black;
-	border: 3px solid red;
-	text-align: justify;
-	padding: 0.5rem 2rem;
 }
 
 #article-dados p, #article-chancho p, #article-netflix p {
@@ -771,6 +741,11 @@ aside h2 {
 	color: red;
 	font-size: 1.2rem;
 	line-height: 1;
+	max-width: 700px;
+	background-color: black;
+	border: 3px solid red;
+	text-align: justify;
+	padding: 0.5rem 2rem;
 }
 
 #inicioPreguntas {
@@ -884,8 +859,7 @@ aside h2 {
 }
 
 #main-secretos article {
-	width: 92%;
-	max-width: 40%;
+	max-width: 735px;
 	background-color: black;
 	border: 3px solid;
 	color: red;
@@ -960,8 +934,7 @@ aside h2 {
 }
 
 #info-nos section {
-	width: 92%;
-	max-width: 40%;
+	max-width: 760px;
 	text-align: center;
 	background-color: black;
 	border: 3px solid red;
@@ -974,15 +947,12 @@ aside h2 {
 }
 
 #info-nos article {
-	width: 60%;
-	max-width: 40%;
+	max-width: 1000px;
 	padding: 0.625rem;
 	text-align: justify;
-	line-height: 1.4;
 	color: crimson;
 	margin-top: 1.25rem;
 	text-shadow: 5px 5px 15px black;
-	max-width: 85%;
 	line-height: 1.5;
 }
 /*-------------------MAIN----------------------*/
