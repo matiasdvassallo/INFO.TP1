@@ -59,9 +59,14 @@ function aplicarEfectos(dado1, dado2) {
     let proba2 = Math.floor(Math.random() * 20) + 1;
     let proba3 = Math.floor(Math.random() * 25) + 1;
     let proba4 = Math.floor(Math.random() * 30) + 1;
-    let proba5 = Math.floor(Math.random() * 60) + 1;
+    let proba5 = Math.floor(Math.random() * 40) + 1;
 
-    if (proba4 == 1 && puntaje >= 1000) {
+    if (!malPresagio && proba5 == 1) {
+        imgdado2.src = 'img/dados/malpresagio.png';
+        efectoP.innerText = 'Mal Presagio';
+        efectoP.style.color = 'purple';
+        malPresagio = true;
+    } else if (proba4 == 1 && puntaje >= 1000) {
         puntaje = Math.round(puntaje / 2);
         efectoP.innerText = 'Exposición al Sol';
         efectoP.style.color = 'orange';
@@ -77,11 +82,6 @@ function aplicarEfectos(dado1, dado2) {
         puntaje += Number(`${dado1}${dado2}`);
         efectoP.innerText = 'Sed de Sangre';
         efectoP.style.color = 'red';
-    } else if (!malPresagio && proba5 == 1) {
-        imgdado2.src = 'img/dados/malpresagio.png';
-        efectoP.innerText = 'Mal Presagio';
-        efectoP.style.color = 'purple';
-        malPresagio = true;
     } else {
         efectoP.innerText = 'Noche Tranquila';
         efectoP.style.color = '#47415d';
@@ -206,6 +206,11 @@ botondados.addEventListener('click', function(e) {
         imgdado2.src = 'img/dados/dado' + dados.dado2 + '.png';
     }
     
+    // REASIGNA VALOR EN CASO DE MAL PRESAGIO 
+    if (malPresagio) {
+        dados.dado2 = 3;
+    }
+
     // SUMAR PUNTAJE
     puntaje += Number(`${dados.dado1}${dados.dado2}`);
 
