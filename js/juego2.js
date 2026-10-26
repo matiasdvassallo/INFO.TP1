@@ -235,7 +235,6 @@ plantarse.addEventListener ('click', function(e) {
     tiradasAisladas = 0;
     }
 
-    localStorage.setItem('puntaje', puntaje);
     guardarPuntajeDados(puntaje);
     guardarPuntajeHistorico(puntaje);
 
