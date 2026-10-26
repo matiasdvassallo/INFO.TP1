@@ -76,7 +76,7 @@ function mostrarTabla(clave, idContenedor, ordenAscendente) {
     contenedor.innerHTML = html;
 }
 
-mostrarTabla('puntajesChancho', 'filasChancho', true);
+mostrarTabla('puntajesChancho', 'filasChancho', false);
 mostrarTabla('puntajesTrivia', 'filasTrivia', false);
 mostrarTabla('puntajesDados', 'filasDados', false);
 

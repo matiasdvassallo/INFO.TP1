@@ -59,6 +59,7 @@ function aplicarEfectos(dado1, dado2) {
     let proba2 = Math.floor(Math.random() * 20) + 1;
     let proba3 = Math.floor(Math.random() * 25) + 1;
     let proba4 = Math.floor(Math.random() * 30) + 1;
+    let proba5 = Math.floor(Math.random() * 60) + 1;
 
     if (proba4 == 1 && puntaje >= 1000) {
         puntaje = Math.round(puntaje / 2);
@@ -76,7 +77,7 @@ function aplicarEfectos(dado1, dado2) {
         puntaje += Number(`${dado1}${dado2}`);
         efectoP.innerText = 'Sed de Sangre';
         efectoP.style.color = 'red';
-    } else if (!malPresagio && proba1 == 2) {
+    } else if (!malPresagio && proba5 == 1) {
         imgdado2.src = 'img/dados/malpresagio.png';
         efectoP.innerText = 'Mal Presagio';
         efectoP.style.color = 'purple';
@@ -85,11 +86,17 @@ function aplicarEfectos(dado1, dado2) {
         efectoP.innerText = 'Noche Tranquila';
         efectoP.style.color = '#47415d';
     }
+
+    if (malPresagio) {
+        botondados.style.borderColor = 'purple'
+        botondados.style.color = 'purple'
+        botondados.style.backgroundColor = 'black'
+    }
 }
 
 // FUNCIÓN COMPROBAR DERROTA
 function comprobarDerrota(dado1, dado2) {
-    if (dado1 == 1 && dado2 == 3) {
+    if ((dado1 == 1 && dado2 == 3) || (malPresagio && dado1 == 1)) {
         texto.innerText = 'VAMPIPERDISTE!';
         plantarse.disabled = true;
         botondados.disabled = true;
@@ -260,6 +267,7 @@ reiniciar.addEventListener('click', function(e) {
     efectoP.style.color = '#47415d';
     reiniciar.style.color = 'crimson';
     reiniciar.style.borderColor = 'crimson';
+    botondados.style.backgroundColor = '#47415d'
 
 });
 
